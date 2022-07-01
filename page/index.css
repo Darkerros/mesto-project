@@ -29,7 +29,7 @@
 /*Card*/
 @import url(../blocks/card/card.css);
 @import url(../blocks/card/__description/card__description.css);
-@import url(../blocks/card/__description-text/card____description-text.css);
+@import url(../blocks/card/__description-text/card___description-text.css);
 @import url(../blocks/card/__description-like/card__description-like.css);
 @import url(../blocks/card/__image/card__image.css);
 /*Elements*/
