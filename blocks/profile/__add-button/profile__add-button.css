@@ -2,18 +2,13 @@
     margin-left: auto;
     width: 150px;
     height: 50px;
-
     border: solid 1px white;
-
     background-color: transparent;
-
     cursor: pointer;
-
     background-image: url("../../../images/profile__add-btn-icon.svg");
     background-position: center;
     background-repeat: no-repeat;
     background-size: 22px;
-
     transition: opacity 0.2s linear;
 }
 

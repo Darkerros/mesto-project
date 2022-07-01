@@ -1,6 +1,5 @@
 @import url(../vendor/normalize.css);
 @import url(../vendor/fonts/fonts.css);
-
 /*Form*/
 @import url(../blocks/form/form.css);
 @import url(../blocks/form/__form/form__form.css);
@@ -10,8 +9,6 @@
 @import url(../blocks/form/__edit-profile-set/form__edit-profile-set.css);
 @import url(../blocks/form/__input/form__input.css);
 @import url(../blocks/form/__accept-profile-edit/form__accept-profile-edit.css);
-
-
 /*Blocks*/
 @import url(../blocks/page/page.css);
 /*Header*/

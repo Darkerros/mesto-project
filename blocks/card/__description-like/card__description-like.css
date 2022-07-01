@@ -1,12 +1,9 @@
 .card__description-like{
     width: 22px;
     height: 19px;
-
     cursor: pointer;
-
     background: transparent;
     border: none;
-
     background-image: url("../../../images/like.svg");
 }
 

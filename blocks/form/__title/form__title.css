@@ -1,6 +1,5 @@
 .form__title{
     color: black;
-
     margin:  0;
     padding-top: 34px;
     padding-left: 36px;
@@ -10,7 +9,6 @@
     .form__title{
         font-size: 18px;
         line-height: 22px;
-
         padding-top: 25px;
         padding-left:22px;
         padding-right:22px;
