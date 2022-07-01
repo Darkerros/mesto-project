@@ -1,0 +1,40 @@
+@import url(../vendor/normalize.css);
+@import url(../vendor/fonts/fonts.css);
+
+/*Form*/
+@import url(../blocks/form/form.css);
+@import url(../blocks/form/__form/form__form.css);
+@import url(../blocks/form/__form-container/form__form-container.css);
+@import url(../blocks/form/__close-btn/form__close-btn.css);
+@import url(../blocks/form/__title/form__title.css);
+@import url(../blocks/form/__edit-profile-set/form__edit-profile-set.css);
+@import url(../blocks/form/__input/form__input.css);
+@import url(../blocks/form/__accept-profile-edit/form__accept-profile-edit.css);
+
+
+/*Blocks*/
+@import url(../blocks/page/page.css);
+/*Header*/
+@import url(../blocks/header/header.css);
+@import url(../blocks/header/__logo/header__logo.css);
+/*Profile*/
+@import url(../blocks/profile/profile.css);
+@import url(../blocks/profile/__about/profile__about.css);
+@import url(../blocks/profile/__avatar/profile__avatar.css);
+@import url(../blocks/profile/__add-button/profile__add-button.css);
+@import url(../blocks/profile/__edit-btn/profile__edit-btn.css);
+@import url(../blocks/profile/__flex-container/profile__flex-container.css);
+@import url(../blocks/profile/__info/profile__info.css);
+@import url(../blocks/profile/__name/profile__name.css);
+/*Card*/
+@import url(../blocks/card/card.css);
+@import url(../blocks/card/__description/card__description.css);
+@import url(../blocks/card/__description-text/card____description-text.css);
+@import url(../blocks/card/__description-like/card__description-like.css);
+@import url(../blocks/card/__image/card__image.css);
+/*Elements*/
+@import url(../blocks/elements/elements.css);
+/*Footer*/
+@import url(../blocks/footer/footer.css);
+@import url(../blocks/footer/__text/footer__text.css);
+

@@ -1,0 +1,22 @@
+.elements{
+    margin: 0 calc((100% / 10) + 72px);
+    padding-top: 50px;
+    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(auto-fill,281px);
+    grid-row-gap: 20px;
+    grid-column-gap: 18px;
+}
+
+@media screen and (max-width: 1024px) {
+    .elements{
+        margin: 0 calc((100% / 10) + 16px);
+        padding-top: 36px;
+    }
+}
+@media screen and (max-width: 425px) {
+    .elements{
+        margin: 0 auto;
+        padding-top: 36px;
+    }
+}

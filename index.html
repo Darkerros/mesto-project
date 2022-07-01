@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Mesto</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./page/index.css">
+</head>
+<body class="page">
+    <div class="form" style="opacity: 0">
+        <div class="form__container">
+            <button class="form__close-btn"></button>
+            <form action="http://localhost:8080" class="form__form">
+                <h2 class="form__title">Редактировать профиль</h2>
+                <fieldset class="form__edit-profile-set">
+                    <input type="text" class="form__input" id="form__nickname-input" name="nickname-set" placeholder="Жак-Ив Кусто">
+                    <input type="text" class="form__input" id="form_about-input" name="about-set" placeholder="Исследователь океана">
+                </fieldset>
+                <button type="submit" class="form__accept-profile-edit">Сохранить</button>
+            </form>
+        </div>
+    </div>
+    <header class="header">
+        <img src="./images/logo.svg" alt="Логотип Место" class="header__logo">
+    </header>
+    <main class="main">
+        <section class="profile">
+            <img src="./images/avatar.jpg" alt="Аватарка профиля" class="profile__avatar">
+            <div class="profile__info">
+                <div class="profile__flex-container">
+                    <h1 class="profile__name">Жак-Ив Кусто</h1>
+                    <button class="profile__edit-btn"></button>
+                </div>
+                <p class="profile__about">Исследователь океана</p>
+            </div>
+            <button class="profile__add-button"></button>
+        </section>
+        <section class="elements">
+            <div class="card">
+                <img src="./images/karachaevsk.jpg" alt="Фото Карачаевска" class="card__image">
+                <div class="card__description">
+                    <p class="card__description-text">Карачаевск</p>
+                    <button class="card__description-like"></button>
+                </div>
+            </div>
+            <div class="card">
+                <img src="./images/elbrus.jpg" alt="Фото горы Эльбруса" class="card__image">
+                <div class="card__description">
+                    <p class="card__description-text">Гора Эльбрус</p>
+                    <button class="card__description-like"></button>
+                </div>
+            </div>
+            <div class="card">
+                <img src="./images/dombai.png" alt="Фото Домбая" class="card__image">
+                <div class="card__description">
+                    <p class="card__description-text">Карачаевск</p>
+                    <button class="card__description-like" ></button>
+                </div>
+            </div>
+            <div class="card">
+                <img src="./images/karachaevsk.jpg" alt="Фото Карачаевска" class="card__image">
+                <div class="card__description">
+                    <p class="card__description-text">Карачаевск</p>
+                    <button class="card__description-like"></button>
+                </div>
+            </div>
+            <div class="card">
+                <img src="./images/elbrus.jpg" alt="Фото горы Эльбруса" class="card__image">
+                <div class="card__description">
+                    <p class="card__description-text">Гора Эльбрус</p>
+                    <button class="card__description-like"></button>
+                </div>
+            </div>
+            <div class="card">
+                <img src="./images/dombai.png" alt="Фото Домбая" class="card__image">
+                <div class="card__description">
+                    <p class="card__description-text">Карачаевск</p>
+                    <button class="card__description-like"></button>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer class="footer">
+        <p class="footer__text">© 2020 Mesto Russia</p>
+    </footer>
+</body>
+</html>
