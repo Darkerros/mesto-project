@@ -2,14 +2,13 @@
     margin: 0 calc((100% / 10) + 72px);
     padding-bottom: 41px;
     padding-top: 45px;
-    border-bottom: solid 1px #545454;
+    border-bottom: solid 1px rgba(84, 84, 84,0.7);
 }
 
 @media screen and (max-width: 1024px) {
     .header{
         padding-bottom: 31px;
         padding-top: 28px;
-        border-bottom: solid 1px #545454;
         margin: 0;
     }
 }

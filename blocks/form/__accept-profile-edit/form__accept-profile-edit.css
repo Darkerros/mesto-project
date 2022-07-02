@@ -6,7 +6,7 @@
     border-radius: 2px;
     cursor: pointer;
     padding: 0;
-    margin: 48px 36px 0;
+    margin: 48px 36px 37px;
     font-style: normal;
     font-weight: 400;
     font-size: 18px;
@@ -25,6 +25,6 @@
         width: 238px;
         font-size: 14px;
         line-height: 17px;
-        margin: 45px 22px 0;
+        margin: 45px 22px 25px;
     }
 }
