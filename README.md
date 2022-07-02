@@ -1,9 +1,17 @@
-# Проект: Место
+# Выполненный учебный проект курса "Веб+"
 
-### Обзор
+## Описание
 
-* Figma
-* Адаптивная верстка
-* Grid/Flex
+Учебный проект по адаптивной верстке "Место".
 
-GitPages https://darkerros.github.io/mesto-project/
+## Что было использовано и изучено
+* Работа с проектами в Figma
+* Использование grid-layout и flex
+* Использование calc для расчетов значений CSS-свойств
+
+## Ссылка на результат проекта
+
+* [Путешествия по России](https://darkerros.github.io/mesto-project/)
+## Ссылка изначальный макет
+
+* [Ссылка на макет в Figma](https://www.figma.com/file/2cn9N9jSkmxD84oJik7xL7/JavaScript.-Sprint-4?node-id=0%3A1)
