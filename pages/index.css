@@ -2,7 +2,7 @@
 @import url(../vendor/fonts/fonts.css);
 /*Form*/
 @import url(../blocks/form/form.css);
-@import url(../blocks/form/_status/form_status_open.css);
+@import url(../blocks/form/_open/form_open.css);
 @import url(../blocks/form/__form/form__form.css);
 @import url(../blocks/form/__form-container/form__form-container.css);
 @import url(../blocks/form/__close-btn/form__close-btn.css);
