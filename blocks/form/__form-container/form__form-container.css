@@ -2,3 +2,10 @@
     position: relative;
     margin: 0 auto;
 }
+
+@media screen and (max-width: 320px) {
+    .form__container{
+        position: relative;
+        margin: 0 19px;
+    }
+}
