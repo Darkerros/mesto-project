@@ -24,6 +24,7 @@
         </section>
         <section class="elements">
             <div class="card">
+                <div class="card__remove-icon"></div>
                 <img src="./images/karachaevsk.jpg" alt="Фото Карачаевска" class="card__image">
                 <div class="card__description">
                     <h3 class="card__description-text">Карачаевск</h3>
@@ -31,6 +32,7 @@
                 </div>
             </div>
             <div class="card">
+                <div class="card__remove-icon"></div>
                 <img src="./images/elbrus.jpg" alt="Фото горы Эльбруса" class="card__image">
                 <div class="card__description">
                     <h3 class="card__description-text">Гора Эльбрус</h3>
@@ -38,6 +40,7 @@
                 </div>
             </div>
             <div class="card">
+                <div class="card__remove-icon"></div>
                 <img src="./images/dombai.jpg" alt="Фото Домбая" class="card__image">
                 <div class="card__description">
                     <h3 class="card__description-text">Карачаевск</h3>
@@ -45,6 +48,7 @@
                 </div>
             </div>
             <div class="card">
+                <div class="card__remove-icon"></div>
                 <img src="./images/karachaevsk.jpg" alt="Фото Карачаевска" class="card__image">
                 <div class="card__description">
                     <h3 class="card__description-text">Карачаевск</h3>
@@ -52,6 +56,7 @@
                 </div>
             </div>
             <div class="card">
+                <div class="card__remove-icon"></div>
                 <img src="./images/elbrus.jpg" alt="Фото горы Эльбруса" class="card__image">
                 <div class="card__description">
                     <h3 class="card__description-text">Гора Эльбрус</h3>
@@ -59,6 +64,7 @@
                 </div>
             </div>
             <div class="card">
+                <div class="card__remove-icon"></div>
                 <img src="./images/dombai.jpg" alt="Фото Домбая" class="card__image">
                 <div class="card__description">
                     <h3 class="card__description-text">Карачаевск</h3>
@@ -70,10 +76,10 @@
     <footer class="footer">
         <p class="footer__text">© 2020 Mesto Russia</p>
     </footer>
-    <div class="form form_open" >
-        <div class="form__container">
-            <button class="form__close-btn" type="button"></button>
-            <form action="http://localhost:8080" class="form__form" name="editing-form">
+    <div class="popup" id="popup-edit-profile" hidden >
+        <div class="popup__container">
+            <button class="popup__close-btn" type="button"></button>
+            <form action="http://localhost:8080" class="form" name="editing-form">
                 <h2 class="form__title">Редактировать профиль</h2>
                 <fieldset class="form__edit-profile-set">
                     <input type="text" class="form__input" id="form__nickname-input" name="nickname-set" placeholder="Жак-Ив Кусто">
@@ -83,5 +89,35 @@
             </form>
         </div>
     </div>
+    <div class="popup" id="popup-add-card" hidden >
+        <div class="popup__container">
+            <button class="popup__close-btn" type="button"></button>
+            <form action="http://localhost:8080" class="form" name="card-add-form">
+                <h2 class="form__title">Новое место</h2>
+                <fieldset class="form__edit-profile-set">
+                    <input type="text" class="form__input" id="form__mesto-input" name="mesto-add" placeholder="Название">
+                    <input type="text" class="form__input" id="form__mesto-img-url-input" name="mesto-img-url" placeholder="Ссылка на картинку">
+                </fieldset>
+                <button type="submit" class="form__accept-profile-edit">Создать</button>
+            </form>
+        </div>
+    </div>
+    <div class="popup" id="popup-selected-card" hidden >
+        <div class="popup__container">
+            <button class="popup__close-btn" type="button"></button>
+            <img src="" alt="Картинка карточки" class="popup__image">
+        </div>
+    </div>
+    <template id="card-template">
+        <div class="card">
+            <div class="card__remove-icon"></div>
+            <img src="./images/karachaevsk.jpg" alt="Фото Карачаевска" class="card__image">
+            <div class="card__description">
+                    <h3 class="card__description-text">Карачаевск</h3>
+                    <button class="card__description-like" type="button"></button>
+                </div>
+        </div>
+    </template>
+    <script src="./pages/index.js"></script>
 </body>
 </html>
