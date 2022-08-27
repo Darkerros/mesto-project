@@ -5,6 +5,9 @@
     background: transparent;
     border: none;
     background-image: url("../../../images/like.svg");
+    background-position: center;
+    background-size: 19px;
+    background-repeat: no-repeat;
 }
 
 .card__description-like:hover{
