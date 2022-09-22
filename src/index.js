@@ -1,3 +1,5 @@
+import '../pages/index.css'
+
 const cardsInfoObjList = [
     {
         name: 'Архыз',
@@ -56,8 +58,15 @@ function closePopup (popup){
     popup.classList.remove("popup_open");
 }
 
+
+function getProfileNameAndAbout(){
+    const name = profileName.textContent;
+    const about = profileAbout.textContent;
+    return {"name":name,"about":about}
+}
+
 function openOPopupProfileEdit(edipPopup){
-    profileOBJ = getProfileNameAndAbout()
+    const profileOBJ = getProfileNameAndAbout()
     editFormNicknameInput.placeholder = profileOBJ["name"];
     editFormAboutInput.placeholder = profileOBJ["about"];
     openPopup(edipPopup);
@@ -76,7 +85,7 @@ function sendEditForm(evt){
         const about =  editFormAboutInput.value;
         setProfileNameAndAbout(name,about);
         closePopup(editProfilePopup);
-        
+
         editFormNicknameInput.value = '';
         editFormAboutInput.value = '';
     }
@@ -101,11 +110,7 @@ function setProfileNameAndAbout (name,about){
     profileName.textContent = name;
     profileAbout.textContent = about;
 }
-function getProfileNameAndAbout (){
-    const name = profileName.textContent;
-    const about = profileAbout.textContent;
-    return {"name":name,"about":about}
-}
+
 
 function addCard(filledCard){
     elementsSection.insertAdjacentElement("afterbegin",filledCard);
