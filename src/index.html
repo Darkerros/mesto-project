@@ -34,8 +34,8 @@
     <form action="#" class="form" name="editing-form">
       <h2 class="form__title">Редактировать профиль</h2>
       <fieldset class="form__edit-profile-set">
-        <input type="text" class="form__input" id="form__nickname-input" name="nickname-set" placeholder="Жак-Ив Кусто">
-        <input type="text" class="form__input" id="form_about-input" name="about-set" placeholder="Исследователь океана">
+        <input type="text" class="form__input" id="form__nickname-input" name="nickname-set" placeholder="Жак-Ив Кусто" minlength="2" maxlength="40" required>
+        <input type="text" class="form__input" id="form_about-input" name="about-set" placeholder="Исследователь океана" minlength="2" maxlength="400" required>
       </fieldset>
       <button type="submit" class="form__accept-profile-edit">Сохранить</button>
     </form>

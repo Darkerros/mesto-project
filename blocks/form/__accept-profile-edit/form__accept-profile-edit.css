@@ -20,6 +20,18 @@
     background: rgba(0,0,0,0.8);
 }
 
+.form__accept-profile-edit:disabled{
+    cursor: default;
+    opacity: 0.2;
+    color: #000000;
+    background: transparent;
+    border: 1px solid #000000;
+    border-radius: 2px;
+}
+.form__accept-profile-edit:disabled:hover{
+    background: transparent;
+}
+
 @media screen and (max-width: 635px){
     .form__accept-profile-edit{
         width: 238px;
