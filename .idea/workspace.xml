@@ -5,11 +5,7 @@
     <list default="true" id="8cdadb90-0d5c-4562-bf65-8cedbe66ad21" name="Changes" comment="add mini rules" />
 =======
     <list default="true" id="1b6a6636-5923-48e1-86b7-6098e2aaa931" name="Changes" comment="Add new configs">
-      <change afterPath="$PROJECT_DIR$/.idea/.name" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
 >>>>>>> origin/main
     <option name="SHOW_DIALOG" value="false" />
@@ -94,7 +90,7 @@
       <updated>1663772506191</updated>
       <workItem from="1663772508754" duration="3684000" />
       <workItem from="1663882305472" duration="95000" />
-      <workItem from="1664202312505" duration="5655000" />
+      <workItem from="1664202312505" duration="6766000" />
     </task>
     <task id="LOCAL-00001" summary="Add new configs">
       <created>1663882383848</created>
@@ -110,7 +106,14 @@
       <option name="project" value="LOCAL" />
       <updated>1663882392670</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Add new configs">
+      <created>1664220689368</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1664220689368</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
 >>>>>>> origin/main
     <servers />
   </component>
