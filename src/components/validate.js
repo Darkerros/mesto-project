@@ -1,8 +1,10 @@
-function showInputError(errorElement,message){
+function showInputError(errorElement,message,input){
     errorElement.textContent = message
+    input.classList.add('form__input_type_error')
 }
-function hideInputError(errorElement){
+function hideInputError(errorElement,input){
     errorElement.textContent = ''
+    input.classList.remove('form__input_type_error')
 }
 function isInputValid(input) {
     const isPatternValid = !input.validity.patternMismatch
@@ -22,7 +24,7 @@ function validateInput(form,evt){
     const currentInput = evt.target
     const currentErrorElement = form.querySelector('.'+currentInput.id + "-error")
     let isValid = isInputValid(currentInput)
-    isValid.valid ? hideInputError(currentErrorElement) : showInputError(currentErrorElement,isValid.message)
+    isValid.valid ? hideInputError(currentErrorElement,currentInput) : showInputError(currentErrorElement,isValid.message,currentInput)
 
     return isValid.valid
 }
