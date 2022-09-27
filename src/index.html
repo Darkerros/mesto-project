@@ -7,11 +7,11 @@
 </head>
 <body class="page">
 <header class="header">
-  <img src="<%=require('../images/logo.svg')%>" alt="Логотип Место" class="header__logo">
+  <img src="<%=require('./images/logo.svg')%>" alt="Логотип Место" class="header__logo">
 </header>
 <main class="main">
   <section class="profile">
-    <img src="<%=require('../images/avatar.jpg')%>" alt="Аватарка профиля" class="profile__avatar">
+    <img src="<%=require('./images/avatar.jpg')%>" alt="Аватарка профиля" class="profile__avatar">
     <div class="profile__info">
       <div class="profile__flex-container">
         <h1 class="profile__name">Жак-Ив Кусто</h1>
@@ -31,32 +31,38 @@
 <div class="popup" id="popup-edit-profile" hidden >
   <div class="popup__container">
     <button class="popup__close-btn" type="button"></button>
-    <form action="#" class="form" name="editing-form">
+    <form action="#" class="form edit-profile-form" name="editing-form">
       <h2 class="form__title">Редактировать профиль</h2>
       <fieldset class="form__edit-profile-set">
         <label class="form__input-label">
-          <input type="text" class="form__input" id="form__nickname-input" name="nickname-set" placeholder="Жак-Ив Кусто" pattern="[а-я- ]+" data-error-msg="Доступна только кирилица,пробелы и дефисы" minlength="2" maxlength="40" required>
-          <span class="form__input-error form__nickname-input-error">Вы пропустили это поле.</span>
+          <input type="text" class="form__input form-nickname-input" id="form-nickname-input" name="nickname-set" placeholder="Жак-Ив Кусто" pattern="[а-я- А-Я]+" data-error-msg="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы" minlength="2" maxlength="40" required>
+          <span class="form__input-error form-nickname-input-error"></span>
         </label>
         <label class="form__input-label">
-          <input type="url" class="form__input" id="form_about-input" name="about-set" placeholder="Исследователь океана" pattern="[а-я- ]+" data-error-msg="Доступна только кирилица,пробелы и дефисы" minlength="2" maxlength="400" required>
-          <span class="form__input-error form_about-input-error"></span>
+          <input type="text" class="form__input form-about-input" id="form-about-input" name="about-set" placeholder="Исследователь океана" pattern="[а-я- А-Я]+" data-error-msg="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы" minlength="2" maxlength="400" required>
+          <span class="form__input-error form-about-input-error"></span>
         </label>
       </fieldset>
-      <button type="submit" class="form__accept-profile-edit">Сохранить</button>
+      <button type="submit" class="form__accept-profile-edit" disabled>Сохранить</button>
     </form>
   </div>
 </div>
 <div class="popup" id="popup-add-card" hidden >
   <div class="popup__container">
     <button class="popup__close-btn" type="button"></button>
-    <form action="#" class="form" name="card-add-form">
+    <form action="#" class="form card-add-form" name="card-add-form" novalidate>
       <h2 class="form__title">Новое место</h2>
       <fieldset class="form__edit-profile-set">
-        <input type="text" class="form__input" id="form__mesto-input" name="mesto-add" placeholder="Название">
-        <input type="text" class="form__input" id="form__mesto-img-url-input" name="mesto-img-url" placeholder="Ссылка на картинку">
+        <label class="form__input-label">
+          <input type="text" class="form__input form__mesto-input" id="form__mesto-input" name="mesto-add" placeholder="Название" pattern="[а-я- А-Я]+" data-error-msg="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы" minlength="2" maxlength="30" required>
+          <span class="form__input-error form__mesto-input-error"></span>
+        </label>
+        <label class="form__input-label">
+          <input type="url" class="form__input form__mesto-img-url-input" id="form__mesto-img-url-input" name="mesto-img-url" placeholder="Ссылка на картинку" required>
+          <span class="form__input-error form__mesto-img-url-input-error"></span>
+        </label>
       </fieldset>
-      <button type="submit" class="form__accept-profile-edit">Создать</button>
+      <button type="submit" class="form__accept-profile-edit" disabled>Создать</button>
     </form>
   </div>
 </div>
@@ -70,7 +76,7 @@
 <template id="card-template">
   <div class="card">
     <div class="card__remove-icon"></div>
-    <img src="<%=require('../images/karachaevsk.jpg')%>" alt="Фото Карачаевска" class="card__image">
+    <img src="<%=require('./images/karachaevsk.jpg')%>" alt="Фото Карачаевска" class="card__image">
     <div class="card__description">
       <h3 class="card__description-text">Карачаевск</h3>
       <button class="card__description-like" type="button"></button>

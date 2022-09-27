@@ -1,11 +1,9 @@
 .form__input-error{
-    position: absolute;
 
     font-style: normal;
     font-weight: 400;
     font-size: 12px;
     line-height: 15px;
     color: #FF0000;
-
-    bottom: -19px;
+    min-height: 30px;
 }
