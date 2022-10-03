@@ -28,7 +28,7 @@ const cardsInfoObjList = [
 ];
 
 const cardTemplate = document.querySelector('#card-template').content.querySelector('.card');
-const imagePopup = document.querySelector('#popup-selected-card');
+export const imagePopup = document.querySelector('#popup-selected-card');
 const imagePopupImg = imagePopup.querySelector('.popup__image');
 const imagePopupImgDescription = imagePopup.querySelector(".popup__img-description");
 

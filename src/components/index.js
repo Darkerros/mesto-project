@@ -17,7 +17,9 @@ validate.enableValidation({
     errorClass: 'form__input__error_visible'
 });
 
-
+// Image popup
+card.imagePopup.addEventListener('mousedown',evt => modal.closePopupOnCloseButtonAndContainer(card.imagePopup,evt))
+card.imagePopup.addEventListener('keydown',evt => modal.closePopupOnEsc(card.imagePopup,evt))
 // Card Popup
 cardPopup.addCardButton.addEventListener("click", () => {
     cardPopup.popupCardFormNameInput.value = ''
