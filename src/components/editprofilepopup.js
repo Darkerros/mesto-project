@@ -1,12 +1,12 @@
 import {closePopup, openPopup} from "./modal";
-import {logPlugin} from "@babel/preset-env/lib/debug";
 
-const profilePopup = document.querySelector('#popup-edit-profile');
-const profilePopupForm = profilePopup.querySelector('.form');
+
+export const profilePopup = document.querySelector('#popup-edit-profile');
+export const profilePopupForm = profilePopup.querySelector('.form');
 const profilePopupNicknameInput = profilePopupForm.querySelector('#form-nickname-input');
 const profilePopupAboutInput = profilePopupForm.querySelector('#form-about-input');
 const profilePopupSubmitButton = profilePopupForm.querySelector('.form__accept-profile-edit');
-const profileEditButton = document.querySelector('.profile').querySelector('.profile__edit-btn');
+export const profileEditButton = document.querySelector('.profile').querySelector('.profile__edit-btn');
 
 const profileName = document.querySelector('.profile').querySelector('.profile__name');
 const profileAbout = document.querySelector('.profile').querySelector('.profile__about');
@@ -21,20 +21,18 @@ function setProfileNameAndAbout(name, about) {
 }
 
 
-function openPopupProfileEdit(editPopup) {
+export function openPopupProfileEdit(editPopup) {
     const profile = getProfileNameAndAbout()
     profilePopupNicknameInput.value = profile["name"];
     profilePopupAboutInput.value = profile["about"];
     openPopup(editPopup);
 }
-function sendEditForm(evt) {
+export function sendEditForm(evt) {
     evt.preventDefault();
     setProfileNameAndAbout(profilePopupNicknameInput.value,profilePopupAboutInput.value);
     closePopup(profilePopup);
     profilePopupSubmitButton.setAttribute("disabled",'disabled')
 }
 
-// Open, Close, Submit Profile Edit Form
-profileEditButton.addEventListener("click", () => openPopupProfileEdit(profilePopup));
-profilePopupForm.addEventListener("submit", (evt) => sendEditForm(evt));
+
 
