@@ -3,10 +3,16 @@ import './card'
 import './modal'
 import './editprofilepopup'
 import './addcardpopup'
-import {enableValidation} from './validate'
+import * as validate from './validate'
 
 
 
-enableValidation('.edit-profile-form', ['.form-nickname-input', '.form-about-input'], '.form__accept-profile-edit')
-enableValidation('.card-add-form', ['.form__mesto-input', '.form__mesto-img-url-input'], '.form__accept-profile-edit')
+validate.enableValidation({
+    formSelector: '.form',
+    inputSelector: '.form__input',
+    submitButtonSelector: '.form__accept',
+    inactiveButtonClass: 'form__accept_disabled',
+    inputErrorClass: 'form__input_type_error',
+    errorClass: 'form__input__error_visible'
+});
 

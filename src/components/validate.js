@@ -1,10 +1,10 @@
-function showInputError(errorElement,message,input){
+function showInputError(errorElement,message,input,settings){
     errorElement.textContent = message
-    input.classList.add('form__input_type_error')
+    input.classList.add(settings.inputErrorClass)
 }
-function hideInputError(errorElement,input){
+function hideInputError(errorElement,input,settings){
     errorElement.textContent = ''
-    input.classList.remove('form__input_type_error')
+    input.classList.remove(settings.inputErrorClass)
 }
 function isInputValid(input) {
     const isPatternValid = !input.validity.patternMismatch
@@ -20,40 +20,47 @@ function isInputValid(input) {
         return {valid: true, message: ''}
     }
 }
-function validateInput(form,evt){
-    const currentInput = evt.target
-    const currentErrorElement = form.querySelector('.'+currentInput.id + "-error")
-    let isValid = isInputValid(currentInput)
-    isValid.valid ? hideInputError(currentErrorElement,currentInput) : showInputError(currentErrorElement,isValid.message,currentInput)
-
+function validateInput(form,inputElement,settings){
+    const currentErrorElement = form.querySelector('.'+inputElement.id + "-error")
+    let isValid = isInputValid(inputElement)
+    isValid.valid ? hideInputError(currentErrorElement,inputElement,settings) : showInputError(currentErrorElement,isValid.message,inputElement,isValid)
     return isValid.valid
 }
 
-function disableEnableButton(button,status) {
-    if (!status){
-        button.setAttribute("disabled", "disabled")
-    }
-    else {
-        button.removeAttribute("disabled")
-    }
-
-}
-function validateForm(form,evt,inputslist,submitButton) {
-    if (inputslist.indexOf(evt.target) !== -1){
-        validateInput(form,evt)
-    }
-
-    const validateInputInfo = inputslist.map((input) => {return isInputValid(input).valid})
-    const isFormValid = validateInputInfo.indexOf(false) !== -1 ? false : true
-
-    disableEnableButton(submitButton,isFormValid)
-}
-function enableValidation(formSelector,inputsSelectorList,submitButtonSelector){
-    const form = document.querySelector(formSelector)
-    const inputslist = inputsSelectorList.map((inputSelector) => {return form.querySelector(inputSelector)})
-    const submitButton = form.querySelector(submitButtonSelector)
-    form.addEventListener("input",(evt) => validateForm(form,evt,inputslist,submitButton))
+export function enableValidation(settings) {
+    const formElementsList = document.querySelectorAll(settings.formSelector);
+    formElementsList.forEach(form => setEventListeners(form,settings))
 }
 
 
-module.exports = {enableValidation}
+function setEventListeners(formElement,settings){
+    const inputList = Array.from(formElement.querySelectorAll(settings.inputSelector));
+    const buttonSubmitElement = formElement.querySelector(settings.submitButtonSelector);
+
+    inputList.forEach((inputElement) => {
+        inputElement.addEventListener('input', () => {validateInput(formElement, inputElement,settings);
+            toggleButtonState(inputList, buttonSubmitElement,settings);
+        });
+    });
+}
+
+function toggleButtonState(inputList, buttonElement,settings){
+    if (hasInvalidInput(inputList)) {
+        buttonElement.setAttribute('disabled',"disabled")
+        buttonElement.classList.add(settings.inactiveButtonClass);
+    } else {
+        buttonElement.removeAttribute('disabled')
+        buttonElement.classList.remove(settings.inactiveButtonClass);
+    }
+};
+
+function hasInvalidInput(inputList) {
+    return inputList.some((inputElement) => {
+        return !isInputValid(inputElement).valid;
+    })
+};
+
+
+
+
+

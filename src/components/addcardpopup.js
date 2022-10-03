@@ -1,4 +1,3 @@
-import {closePopup, openPopup} from "./modal";
 import {addCard, getFilledCard} from "./card";
 
 const addCardButton = document.querySelector(".profile").querySelector('.profile__add-button');
