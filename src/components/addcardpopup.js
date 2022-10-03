@@ -2,28 +2,23 @@ import {closePopup, openPopup} from "./modal";
 import {addCard, getFilledCard} from "./card";
 
 const addCardButton = document.querySelector(".profile").querySelector('.profile__add-button');
-const addCardPopup = document.querySelector('#popup-add-card');
-const addCardForm = addCardPopup.querySelector(".form");
-const addCardFormCardNameInput = addCardForm.querySelector("#form__mesto-input");
-const addCardFormCardImageLink = addCardForm.querySelector("#form__mesto-img-url-input");
+const popupCard = document.querySelector('#popup-add-card');
+const popupCardForm = popupCard.querySelector(".form");
+const popupCardFormSubmitButton = popupCard.querySelector(".form__accept");
+const popupCardFormNameInput = popupCardForm.querySelector("#form__mesto-input");
+const popupCardFormImageLink = popupCardForm.querySelector("#form__mesto-img-url-input");
 
 function sendAddForm(evt) {
     evt.preventDefault();
-    if (addCardFormCardNameInput.value && addCardFormCardImageLink.value) {
-        const mestoName = addCardFormCardNameInput.value;
-        const mestoImageUrl = addCardFormCardImageLink.value;
-        addCardFormCardNameInput.value = ''
-        addCardFormCardImageLink.value = ''
-
-        addCard(getFilledCard(mestoName, mestoImageUrl));
-        closePopup(addCardPopup);
-    } else {
-        alert("Не все поля заполнены")
-    }
+    addCard(getFilledCard(popupCardFormNameInput.value,popupCardFormImageLink.value))
+    closePopup(popupCard)
+    popupCardFormSubmitButton.setAttribute('disabled','disabled')
 }
 
 addCardButton.addEventListener("click", () => {
-    addCardFormCardNameInput.value = ''
-    addCardFormCardImageLink.value = ''
-    openPopup(addCardPopup)})
-addCardForm.addEventListener("submit", (evt) => sendAddForm(evt))
+    popupCardFormNameInput.value = ''
+    popupCardFormImageLink.value = ''
+    openPopup(popupCard)}
+)
+
+popupCardForm.addEventListener("submit", (evt) => sendAddForm(evt))

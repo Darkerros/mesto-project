@@ -1,9 +1,9 @@
-import './pages/index.css'
-import './components/card'
-import './components/modal'
-import './components/editprofilepopup'
-import './components/addcardpopup'
-import {enableValidation} from './components/validate'
+import '../pages/index.css'
+import './card'
+import './modal'
+import './editprofilepopup'
+import './addcardpopup'
+import {enableValidation} from './validate'
 
 
 
