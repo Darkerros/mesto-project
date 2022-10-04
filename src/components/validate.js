@@ -22,16 +22,10 @@ function isInputValid(input) {
 }
 function validateInput(form,inputElement,settings){
     const currentErrorElement = form.querySelector('.'+inputElement.id + "-error")
-    let isValid = isInputValid(inputElement)
+    const isValid = isInputValid(inputElement)
     isValid.valid ? hideInputError(currentErrorElement,inputElement,settings) : showInputError(currentErrorElement,isValid.message,inputElement,isValid)
     return isValid.valid
 }
-
-export function enableValidation(settings) {
-    const formElementsList = document.querySelectorAll(settings.formSelector);
-    formElementsList.forEach(form => setEventListeners(form,settings))
-}
-
 
 function setEventListeners(formElement,settings){
     const inputList = Array.from(formElement.querySelectorAll(settings.inputSelector));
@@ -59,6 +53,12 @@ function hasInvalidInput(inputList) {
         return !isInputValid(inputElement).valid;
     })
 };
+
+export function enableValidation(settings) {
+    const formElementsList = document.querySelectorAll(settings.formSelector);
+    formElementsList.forEach(form => setEventListeners(form,settings))
+}
+
 
 
 

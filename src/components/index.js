@@ -2,26 +2,39 @@ import '../pages/index.css'
 import * as card from './card'
 import * as modal from './modal'
 import * as validate from './validate'
+import * as consts from './consts'
 
 
-
-function sendAddForm(evt) {
-    evt.preventDefault();
-    card.addCard(card.getFilledCard(modal.popupCardFormNameInput.value,modal.popupCardFormImageLink.value))
-    modal.closePopup(modal.popupCard)
-    modal.popupCardFormSubmitButton.setAttribute('disabled','disabled')
+export function getProfileNameAndAbout() {
+    return {"name": consts.profileNameElement.textContent, "about": consts.profileAboutElement.textContent}
 }
+export function setProfileNameAndAbout(name, about) {
+    consts.profileNameElement.textContent = name;
+    consts.profileAboutElement.textContent = about;
+}
+
 function openPopupProfileEdit(editPopup) {
-    const profile = modal.getProfileNameAndAbout()
-    modal.profilePopupNicknameInput.value = profile["name"];
-    modal.profilePopupAboutInput.value = profile["about"];
+    const profile = getProfileNameAndAbout()
+    consts.profilePopupNicknameInput.value = profile["name"];
+    consts.profilePopupAboutInput.value = profile["about"];
     modal.openPopup(editPopup);
+}
+function openPopupAddCard(){
+    consts.popupCardFormNameInput.value = ''
+    consts.popupCardFormImageLink.value = ''
+    modal.openPopup(consts.popupCard)
 }
 function sendEditForm(evt) {
     evt.preventDefault();
-    modal.setProfileNameAndAbout(modal.profilePopupNicknameInput.value,modal.profilePopupAboutInput.value);
-    modal.closePopup(modal.profilePopup);
-    modal.profilePopupSubmitButton.setAttribute("disabled",'disabled')
+    setProfileNameAndAbout(consts.profilePopupNicknameInput.value,consts.profilePopupAboutInput.value);
+    modal.closePopup(consts.profilePopup);
+    consts.profilePopupSubmitButton.setAttribute("disabled",'disabled')
+}
+function sendAddForm(evt) {
+    evt.preventDefault();
+    card.addCard(card.getFilledCard(consts.popupCardFormNameInput.value,consts.popupCardFormImageLink.value))
+    modal.closePopup(consts.popupCard)
+    consts.popupCardFormSubmitButton.setAttribute('disabled','disabled')
 }
 
 validate.enableValidation({
@@ -32,19 +45,12 @@ validate.enableValidation({
     inputErrorClass: 'form__input_type_error',
     errorClass: 'form__input__error_visible'
 });
-
-
-document.addEventListener('keydown',evt => modal.closePopupOnEsc(evt))
-// Image popup
-card.imagePopup.addEventListener('mousedown',evt => modal.closePopupOnCloseButtonAndContainer(card.imagePopup,evt))
 // Card Popup
-modal.addCardButton.addEventListener("click", () => {
-    modal.popupCardFormNameInput.value = ''
-    modal.popupCardFormImageLink.value = ''
-    modal.openPopup(modal.popupCard)})
-modal.popupCard.addEventListener('mousedown',evt => modal.closePopupOnCloseButtonAndContainer(modal.popupCard,evt))
-modal.popupCardForm.addEventListener("submit", (evt) => sendAddForm(evt))
+consts.addCardButton.addEventListener("click", () => {openPopupAddCard()})
+consts.popupCardForm.addEventListener("submit", (evt) => sendAddForm(evt))
 // Profile popup
-modal.profileEditButton.addEventListener("click", () => openPopupProfileEdit(modal.profilePopup));
-modal.profilePopup.addEventListener('mousedown',evt => modal.closePopupOnCloseButtonAndContainer(modal.profilePopup,evt))
-modal.profilePopupForm.addEventListener("submit", (evt) => sendEditForm(evt));
+consts.profileEditButton.addEventListener("click", () => openPopupProfileEdit(consts.profilePopup));
+consts.profilePopupForm.addEventListener("submit", (evt) => sendEditForm(evt));
+
+consts.allPopups.forEach(popup => popup.addEventListener('mousedown',evt => modal.closePopupOnCloseButtonAndContainer(popup,evt)))
+card.addCardsFromObjList(consts.cardsInfoObjList);
