@@ -1,12 +1,28 @@
 import '../pages/index.css'
 import * as card from './card'
 import * as modal from './modal'
-import * as cardPopup from './addcardpopup'
 import * as validate from './validate'
-import * as profilePopup from "./editprofilepopup";
 
 
 
+function sendAddForm(evt) {
+    evt.preventDefault();
+    card.addCard(card.getFilledCard(modal.popupCardFormNameInput.value,modal.popupCardFormImageLink.value))
+    modal.closePopup(modal.popupCard)
+    modal.popupCardFormSubmitButton.setAttribute('disabled','disabled')
+}
+function openPopupProfileEdit(editPopup) {
+    const profile = modal.getProfileNameAndAbout()
+    modal.profilePopupNicknameInput.value = profile["name"];
+    modal.profilePopupAboutInput.value = profile["about"];
+    modal.openPopup(editPopup);
+}
+function sendEditForm(evt) {
+    evt.preventDefault();
+    modal.setProfileNameAndAbout(modal.profilePopupNicknameInput.value,modal.profilePopupAboutInput.value);
+    modal.closePopup(modal.profilePopup);
+    modal.profilePopupSubmitButton.setAttribute("disabled",'disabled')
+}
 
 validate.enableValidation({
     formSelector: '.form',
@@ -17,19 +33,18 @@ validate.enableValidation({
     errorClass: 'form__input__error_visible'
 });
 
+
+document.addEventListener('keydown',evt => modal.closePopupOnEsc(evt))
 // Image popup
 card.imagePopup.addEventListener('mousedown',evt => modal.closePopupOnCloseButtonAndContainer(card.imagePopup,evt))
-card.imagePopup.addEventListener('keydown',evt => modal.closePopupOnEsc(card.imagePopup,evt))
 // Card Popup
-cardPopup.addCardButton.addEventListener("click", () => {
-    cardPopup.popupCardFormNameInput.value = ''
-    cardPopup.popupCardFormImageLink.value = ''
-    modal.openPopup(cardPopup.popupCard)})
-cardPopup.popupCard.addEventListener('mousedown',evt => modal.closePopupOnCloseButtonAndContainer(cardPopup.popupCard,evt))
-cardPopup.popupCard.addEventListener('keydown',evt => modal.closePopupOnEsc(cardPopup.popupCard,evt))
-cardPopup.popupCardForm.addEventListener("submit", (evt) => cardPopup.sendAddForm(evt))
+modal.addCardButton.addEventListener("click", () => {
+    modal.popupCardFormNameInput.value = ''
+    modal.popupCardFormImageLink.value = ''
+    modal.openPopup(modal.popupCard)})
+modal.popupCard.addEventListener('mousedown',evt => modal.closePopupOnCloseButtonAndContainer(modal.popupCard,evt))
+modal.popupCardForm.addEventListener("submit", (evt) => sendAddForm(evt))
 // Profile popup
-profilePopup.profileEditButton.addEventListener("click", () => profilePopup.openPopupProfileEdit(profilePopup.profilePopup));
-profilePopup.profilePopup.addEventListener('mousedown',evt => modal.closePopupOnCloseButtonAndContainer(profilePopup.profilePopup,evt))
-profilePopup.profilePopup.addEventListener('keydown',evt => modal.closePopupOnEsc(profilePopup.profilePopup,evt))
-profilePopup.profilePopupForm.addEventListener("submit", (evt) => profilePopup.sendEditForm(evt));
+modal.profileEditButton.addEventListener("click", () => openPopupProfileEdit(modal.profilePopup));
+modal.profilePopup.addEventListener('mousedown',evt => modal.closePopupOnCloseButtonAndContainer(modal.profilePopup,evt))
+modal.profilePopupForm.addEventListener("submit", (evt) => sendEditForm(evt));
