@@ -5,6 +5,7 @@ import * as validate from './validate'
 import * as consts from './consts'
 
 
+
 export function getProfileNameAndAbout() {
     return {"name": consts.profileNameElement.textContent, "about": consts.profileAboutElement.textContent}
 }
