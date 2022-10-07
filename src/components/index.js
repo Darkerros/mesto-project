@@ -3,15 +3,15 @@ import * as card from './card'
 import * as modal from './modal'
 import * as validate from './validate'
 import * as consts from './consts'
-import './api'
+import * as api from './api'
+import * as profile from './profile'
 
 
 export function getProfileNameAndAbout() {
     return {"name": consts.profileNameElement.textContent, "about": consts.profileAboutElement.textContent}
 }
-export function setProfileNameAndAbout(name, about) {
-    consts.profileNameElement.textContent = name;
-    consts.profileAboutElement.textContent = about;
+function disableButton(button){
+    button.setAttribute("disabled",'disabled')
 }
 
 function openPopupProfileEdit(editPopup) {
@@ -27,9 +27,17 @@ function openPopupAddCard(){
 }
 function sendEditForm(evt) {
     evt.preventDefault();
-    setProfileNameAndAbout(consts.profilePopupNicknameInput.value,consts.profilePopupAboutInput.value);
-    modal.closePopup(consts.profilePopup);
-    consts.profilePopupSubmitButton.setAttribute("disabled",'disabled')
+    api.updateProfile(consts.profilePopupNicknameInput.value,consts.profilePopupNicknameInput.value)
+        .then(updateProfileInfo => {
+            profile.setprofileInfo(updateProfileInfo.name,updateProfileInfo.about)
+            modal.closePopup(consts.profilePopup);
+            disableButton(consts.profilePopupSubmitButton)
+        })
+        .catch(errorResp => errorResp.json().then(error => {
+            modal.closePopup(consts.profilePopup);
+            disableButton(consts.profilePopupSubmitButton)
+            modal.openErrorPopup(error.message)
+        }))
 }
 function sendAddForm(evt) {
     evt.preventDefault();
@@ -54,4 +62,12 @@ consts.profileEditButton.addEventListener("click", () => openPopupProfileEdit(co
 consts.profilePopupForm.addEventListener("submit", (evt) => sendEditForm(evt));
 
 consts.allPopups.forEach(popup => popup.addEventListener('mousedown',evt => modal.closePopupOnCloseButtonAndContainer(popup,evt)))
-card.addCardsFromObjList(consts.cardsInfoObjList);
+;
+
+Promise.all([api.getProfile(),api.getCards()])
+    .then(dataList => {
+        profile.setprofile(dataList[0])
+        card.addCardsFromObjList(dataList[1])
+        }
+    )
+    .catch(errorResp => errorResp.json().then(error => modal.openErrorPopup(error.message)))

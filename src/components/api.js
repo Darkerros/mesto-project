@@ -3,12 +3,12 @@ const autorizationToken = 'fb67a6f2-1294-49f9-bf70-71dc37364dd5'
 const cohortId = 'plus-cohort-15'
 
 const methods = {
-    GET: 'GET',
-    PUT: 'PUT',
-    POST: 'POST',
-    UPDATE: 'UPDATE',
-    PATCH: 'PATCH',
-    DELETE: 'DELETE'
+    GET: "GET",
+    PUT: "PUT",
+    POST: "POST",
+    UPDATE: "UPDATE",
+    PATCH: "PATCH",
+    DELETE: "DELETE"
 }
 
 const endpointAndMethodGenerator = {
@@ -41,59 +41,58 @@ const endpointAndMethodGenerator = {
 const apiConfig = {
     headers: {
         'Authorization': autorizationToken,
-        'Accept-Encoding': 'application/json'
+        'Accept-Encoding': 'application/json',
     },
     baseurl: `https://nomoreparties.co/v1/${cohortId}/`
 }
 
-
-function createRequest(endpointSettings, reqBody = undefined) {
-    const reqConf = {
+function createRequest(endpointSettings, body = '') {
+    const params = {
         headers: apiConfig.headers,
-        method: endpointSettings.method
+        method: endpointSettings.method,
     }
+    methods !== methods.GET && body ?  params.body = JSON.stringify({...body}): false
 
-    if (reqBody) reqConf.body = JSON.stringify(reqBody);
 
-    return fetch(apiConfig.baseurl + endpointSettings.endpoint, reqConf)
+    return fetch(apiConfig.baseurl + endpointSettings.endpoint,params)
         .then(res => {
             if (res.ok) return res.json();
             return  Promise.reject(res);
         })
 }
 
-function getCards() {
+export function getCards() {
     const requestSettings = endpointAndMethodGenerator.getcards()
     return createRequest(requestSettings)
 }
-function addCard(name,link){
+export function addCard(name,link){
     const requestSettings = endpointAndMethodGenerator.addCards()
     return createRequest(requestSettings,{name: name,link : link})
 }
-function deleteCard(cardId){
+export function deleteCard(cardId){
     const requestSettings = endpointAndMethodGenerator.removeCard(cardId)
     return createRequest(requestSettings)
 }
 
-function installLike(cardId){
+export function installLike(cardId){
     const requestSettings = endpointAndMethodGenerator.installLike(cardId)
     return createRequest(requestSettings)
 }
-function deleteLike(cardId){
+export function deleteLike(cardId){
     const requestSettings = endpointAndMethodGenerator.deleteLike(cardId)
     return createRequest(requestSettings)
 }
 
-function getProfile() {
+export function getProfile() {
     const requestSettings = endpointAndMethodGenerator.getprofile()
     return createRequest(requestSettings)
 }
-function updateProfile(name,about) {
+export function updateProfile(name,about) {
     const requestSettings = endpointAndMethodGenerator.updateProfile()
-    return createRequest(requestSettings,{name: name,about : about})
+    return createRequest(requestSettings,{name,about})
 }
 
-function updateAvatar(avatarUrl){
+export function updateAvatar(avatarUrl){
     const requestSettings = endpointAndMethodGenerator.updateProfile()
     return createRequest(requestSettings,{avatar: avatarUrl})
 }

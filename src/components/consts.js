@@ -54,3 +54,14 @@ export const imagePopupImg = imagePopup.querySelector('.popup__image');
 export const imagePopupImgDescription = imagePopup.querySelector(".popup__img-description");
 
 export const elementsSection = document.querySelector(".elements");
+
+// Error popup
+export const errorPopup = document.querySelector('#popup-error')
+export const errorPopupMessageElement = errorPopup.querySelector('.form__error')
+// accept popup
+export const acceptPopup = document.querySelector('#popup-error')
+// Update avatar popup
+export const avatarUpdatetPopup = document.querySelector('#popup-update-avatar')
+// Avatar edit
+export const avatarEditBtn = document.querySelector('.profile__avatar-group')
+export const avatarElement = document.querySelector('.profile__avatar')

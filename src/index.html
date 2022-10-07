@@ -11,7 +11,9 @@
 </header>
 <main class="main">
   <section class="profile">
-    <img src="<%=require('./images/avatar.jpg')%>" alt="Аватарка профиля" class="profile__avatar">
+    <div class="profile__avatar-group">
+      <img src="<%=require('./images/avatar.jpg')%>" alt="Аватарка профиля" class="profile__avatar">
+    </div>
     <div class="profile__info">
       <div class="profile__flex-container">
         <h1 class="profile__name">Жак-Ив Кусто</h1>
@@ -34,11 +36,11 @@
       <h2 class="form__title">Редактировать профиль</h2>
       <fieldset class="form__edit-profile-set">
         <label class="form__input-label">
-          <input type="text" class="form__input form-nickname-input" id="form-nickname-input" name="nickname-set" placeholder="Имя" pattern="[а-я- А-Я]+" data-error-msg="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы" minlength="2" maxlength="40" required>
+          <input type="text" class="form__input form-nickname-input" id="form-nickname-input" name="nickname-set" placeholder="Имя" pattern="^[a-zA-Zа-яА-Я-\s]+$" data-error-msg="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы" minlength="2" maxlength="40" required>
           <span class="form__input-error form-nickname-input-error"></span>
         </label>
         <label class="form__input-label">
-          <input type="text" class="form__input form-about-input" id="form-about-input" name="about-set" placeholder="Описание" pattern="[а-я- А-Я]+" data-error-msg="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы" minlength="2" maxlength="400" required>
+          <input type="text" class="form__input form-about-input" id="form-about-input" name="about-set" placeholder="Описание" pattern="^[a-zA-Zа-яА-Я-\s]+$" data-error-msg="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы" minlength="2" maxlength="400" required>
           <span class="form__input-error form-about-input-error"></span>
         </label>
       </fieldset>
@@ -53,7 +55,7 @@
       <h2 class="form__title">Новое место</h2>
       <fieldset class="form__edit-profile-set">
         <label class="form__input-label">
-          <input type="text" class="form__input form__mesto-input" id="form__mesto-input" name="mesto-add" placeholder="Название" pattern="[а-я- А-Я]+" data-error-msg="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы" minlength="2" maxlength="30" required>
+          <input type="text" class="form__input form__mesto-input" id="form__mesto-input" name="mesto-add" placeholder="Название" pattern="^[a-zA-Zа-яА-Я-\s]+$" data-error-msg="Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы" minlength="2" maxlength="30" required>
           <span class="form__input-error form__mesto-input-error"></span>
         </label>
         <label class="form__input-label">
