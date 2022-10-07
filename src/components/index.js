@@ -30,15 +30,20 @@ function openPopupAddCard(){
 }
 function sendEditForm(evt) {
     evt.preventDefault();
-    api.updateProfile(consts.profilePopupNicknameInput.value,consts.profilePopupNicknameInput.value)
+    setButtonText(consts.profilePopupSubmitButton,'Идет сохранение...')
+    disableButton(consts.profilePopupSubmitButton)
+    api.updateProfile(consts.profilePopupNicknameInput.value,consts.profilePopupAboutInput.value)
         .then(updateProfileInfo => {
-            profile.setprofileInfo(updateProfileInfo.name,updateProfileInfo.about)
-            modal.closePopup(consts.profilePopup);
-            disableButton(consts.profilePopupSubmitButton)
+            setButtonText(consts.profilePopupSubmitButton,'Успешно')
+            setTimeout(() => {
+                profile.setprofileInfo(updateProfileInfo.name,updateProfileInfo.about)
+                modal.closePopup(consts.profilePopup);
+                setButtonText(consts.profilePopupSubmitButton,'Сохранить')
+            },700)
         })
         .catch(errorResp => errorResp.json().then(error => {
+            setButtonText(consts.profilePopupSubmitButton,'Сохранить')
             modal.closePopup(consts.profilePopup);
-            disableButton(consts.profilePopupSubmitButton)
             modal.openErrorPopup(error.message)
         }))
 }
@@ -46,40 +51,35 @@ function sendAddForm(evt) {
     evt.preventDefault();
     const name = consts.popupCardFormNameInput.value
     const link = consts.popupCardFormImageLink.value
+    disableButton(consts.popupCardFormSubmitButton)
     setButtonText(consts.popupCardFormSubmitButton,"Идет сохранение")
     api.addCard(name,link)
         .then(addedCardInfo => {
-        setButtonText(consts.popupCardFormSubmitButton,"Успешно")
-        disableButton(consts.popupCardFormSubmitButton)
-        setTimeout(() => {
-            modal.closePopup(consts.popupCard)
-            card.addCard(card.getFilledCard(addedCardInfo))
-            setButtonText(consts.popupCardFormSubmitButton,"Сохранить")
-            modal.openErrorPopup(error.message)
-        },1000)
-    })
+            setButtonText(consts.popupCardFormSubmitButton,"Успешно")
+            setTimeout(() => {
+                modal.closePopup(consts.popupCard)
+                card.addCard(card.getFilledCard(addedCardInfo))
+                setButtonText(consts.popupCardFormSubmitButton,"Сохранить")
+            },1000)
+        })
         .catch(errorResp => errorResp.json().then(error => {
-
-        setButtonText(consts.popupCardFormSubmitButton,"Не удалось добавить карточку")
-        disableButton(consts.popupCardFormSubmitButton)
-        setTimeout(() => {
-            modal.closePopup(consts.popupCard)
-            setButtonText(consts.popupCardFormSubmitButton,"Сохранить")
-            modal.openErrorPopup(error.message)
-        },1000)
-    }))
-
-
+            setButtonText(consts.popupCardFormSubmitButton,"Не удалось добавить карточку")
+            setTimeout(() => {
+                modal.closePopup(consts.popupCard)
+                setButtonText(consts.popupCardFormSubmitButton,"Сохранить")
+                modal.openErrorPopup(error.message)
+            },1000)
+        }))
 }
 
 function sendUpdateAvatarForm(evt){
     evt.preventDefault();
     const avatarUrl = consts.avatarUpdatePopupInput.value
-    setButtonText(consts.avatarUpdatePopupSubmitBtn,"Сохраняю...")
+    setButtonText(consts.avatarUpdatePopupSubmitBtn,"Идет сохранение...")
+    disableButton(consts.avatarUpdatePopupSubmitBtn)
     api.updateAvatar(avatarUrl)
         .then(profileInfo => {
             setButtonText(consts.avatarUpdatePopupSubmitBtn,"Успешно")
-            disableButton(consts.avatarUpdatePopupSubmitBtn)
             profile.setprofile(profileInfo)
             modal.closePopup(consts.avatarUpdatePopup)
             setButtonText(consts.avatarUpdatePopupSubmitBtn,"Сохранить")
@@ -87,7 +87,6 @@ function sendUpdateAvatarForm(evt){
         })
         .catch(errorResp => errorResp.json().then(error => {
             modal.closePopup(consts.avatarUpdatePopup)
-            disableButton(consts.avatarUpdatePopupSubmitBtn)
             modal.openErrorPopup(error.message)
             setButtonText(consts.avatarUpdatePopupSubmitBtn,"Сохранить")
             consts.avatarUpdatePopupInput.value = ''
