@@ -24,33 +24,36 @@ function openPopupProfileEdit(editPopup) {
     modal.openPopup(editPopup);
 }
 function openPopupAddCard(){
-    consts.popupCardFormNameInput.value = ''
-    consts.popupCardFormImageLink.value = ''
     modal.openPopup(consts.popupCard)
 }
 function sendEditForm(evt) {
     evt.preventDefault();
+    const nickname = consts.profilePopupNicknameInput.value
+    const about = consts.profilePopupAboutInput.value
+    evt.target.reset()
     setButtonText(consts.profilePopupSubmitButton,'Идет сохранение...')
     disableButton(consts.profilePopupSubmitButton)
-    api.updateProfile(consts.profilePopupNicknameInput.value,consts.profilePopupAboutInput.value)
+    api.updateProfile(nickname,about)
         .then(updateProfileInfo => {
             setButtonText(consts.profilePopupSubmitButton,'Успешно')
             setTimeout(() => {
                 profile.setprofileInfo(updateProfileInfo.name,updateProfileInfo.about)
                 modal.closePopup(consts.profilePopup);
-                setButtonText(consts.profilePopupSubmitButton,'Сохранить')
             },700)
         })
         .catch(errorResp => errorResp.json().then(error => {
-            setButtonText(consts.profilePopupSubmitButton,'Сохранить')
             modal.closePopup(consts.profilePopup);
             modal.openErrorPopup(error.message)
         }))
+        .finally(() => {
+            setButtonText(consts.profilePopupSubmitButton,'Сохранить')
+        })
 }
 function sendAddForm(evt) {
     evt.preventDefault();
     const name = consts.popupCardFormNameInput.value
     const link = consts.popupCardFormImageLink.value
+    evt.target.reset()
     disableButton(consts.popupCardFormSubmitButton)
     setButtonText(consts.popupCardFormSubmitButton,"Идет сохранение")
     api.addCard(name,link)
@@ -59,17 +62,18 @@ function sendAddForm(evt) {
             setTimeout(() => {
                 modal.closePopup(consts.popupCard)
                 card.addCard(card.getFilledCard(addedCardInfo))
-                setButtonText(consts.popupCardFormSubmitButton,"Сохранить")
             },1000)
         })
         .catch(errorResp => errorResp.json().then(error => {
             setButtonText(consts.popupCardFormSubmitButton,"Не удалось добавить карточку")
             setTimeout(() => {
                 modal.closePopup(consts.popupCard)
-                setButtonText(consts.popupCardFormSubmitButton,"Сохранить")
                 modal.openErrorPopup(error.message)
             },1000)
         }))
+        .finally(() => {
+            setButtonText(consts.profilePopupSubmitButton,'Сохранить')
+        })
 }
 
 function sendUpdateAvatarForm(evt){
@@ -80,17 +84,21 @@ function sendUpdateAvatarForm(evt){
     api.updateAvatar(avatarUrl)
         .then(profileInfo => {
             setButtonText(consts.avatarUpdatePopupSubmitBtn,"Успешно")
-            profile.setprofile(profileInfo)
-            modal.closePopup(consts.avatarUpdatePopup)
-            setButtonText(consts.avatarUpdatePopupSubmitBtn,"Сохранить")
-            consts.avatarUpdatePopupInput.value = ''
+            setTimeout(() => {
+                profile.setprofile(profileInfo)
+                modal.closePopup(consts.avatarUpdatePopup)
+            },1000)
         })
         .catch(errorResp => errorResp.json().then(error => {
-            modal.closePopup(consts.avatarUpdatePopup)
-            modal.openErrorPopup(error.message)
-            setButtonText(consts.avatarUpdatePopupSubmitBtn,"Сохранить")
-            consts.avatarUpdatePopupInput.value = ''
+            setButtonText(consts.avatarUpdatePopupSubmitBtn,"Произошла ошибка...")
+            setTimeout(() => {
+                modal.closePopup(consts.avatarUpdatePopup)
+                modal.openErrorPopup(error.message)
+            },1000)
         }))
+        .finally(() => {
+            setButtonText(consts.profilePopupSubmitButton,'Сохранить')
+        })
 }
 
 validate.enableValidation({
