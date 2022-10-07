@@ -1,5 +1,4 @@
 import * as consts from './consts'
-import {avatarElement, profileNameElement} from "./consts";
 
 export const profile = {
     "name" : "",

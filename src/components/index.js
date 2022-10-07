@@ -5,7 +5,6 @@ import * as validate from './validate'
 import * as consts from './consts'
 import * as api from './api'
 import * as profile from './profile'
-import {avatarUpdatePopupSubmitBtn} from "./consts";
 
 
 export function getProfileNameAndAbout() {
