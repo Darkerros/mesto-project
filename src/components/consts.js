@@ -61,7 +61,10 @@ export const errorPopupMessageElement = errorPopup.querySelector('.form__error')
 // accept popup
 export const acceptPopup = document.querySelector('#popup-error')
 // Update avatar popup
-export const avatarUpdatetPopup = document.querySelector('#popup-update-avatar')
+export const avatarUpdatePopup = document.querySelector('#popup-update-avatar')
+export const avatarUpdatePopupForm = avatarUpdatePopup.querySelector('.form')
+export const avatarUpdatePopupInput = avatarUpdatePopup.querySelector('#form__mesto-avatar-url-input')
+export const avatarUpdatePopupSubmitBtn = avatarUpdatePopup.querySelector('.form__accept')
 // Avatar edit
 export const avatarEditBtn = document.querySelector('.profile__avatar-group')
 export const avatarElement = document.querySelector('.profile__avatar')

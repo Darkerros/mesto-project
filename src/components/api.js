@@ -93,6 +93,6 @@ export function updateProfile(name,about) {
 }
 
 export function updateAvatar(avatarUrl){
-    const requestSettings = endpointAndMethodGenerator.updateProfile()
+    const requestSettings = endpointAndMethodGenerator.updateAvatar()
     return createRequest(requestSettings,{avatar: avatarUrl})
 }

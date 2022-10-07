@@ -1,5 +1,4 @@
 import * as consts from "./consts";
-import {avatarUpdatetPopup, errorPopupMessageElement} from "./consts";
 
 
 export function openPopup(popup) {
@@ -30,12 +29,10 @@ export function openErrorPopup(error){
     consts.errorPopupMessageElement.textContent = error
     openPopup(consts.errorPopup)
 }
-export function openUpdateProfilePopup(){
-    openPopup(consts.avatarUpdatetPopup)
+export function openUpdateAvatarPopup(){
+    openPopup(consts.avatarUpdatePopup)
 }
-export function openAcceptPopup(){
-    openPopup(consts.acceptPopup)
-}
+
 
 
 

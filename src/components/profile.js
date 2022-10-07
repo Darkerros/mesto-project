@@ -28,6 +28,12 @@ export function updateProfileAvatar(avatarUrl){
     profile.avatar = avatarUrl
     renderCurrentProfile()
 }
+export function isIncludeCurrentProfile(idList){
+    return idList.some(id => profile._id === id)
+}
+export function isCurrentProfile(id){
+    return profile._id === id
+}
 
 function renderCurrentProfile(){
     consts.avatarElement.src = profile.avatar
