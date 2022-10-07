@@ -22,7 +22,6 @@
     <button class="profile__add-button" type="button"></button>
   </section>
   <section class="elements">
-
   </section>
 </main>
 <footer class="footer">
@@ -66,6 +65,39 @@
     </form>
   </div>
 </div>
+<div class="popup" id="popup-update-avatar" hidden >
+  <div class="popup__container">
+    <button class="popup__close-btn" type="button"></button>
+    <form action="#" class="form card-add-form" name="card-update-avatar-form" novalidate>
+      <h2 class="form__title">Обновить аватар</h2>
+      <fieldset class="form__edit-profile-set">
+        <label class="form__input-label">
+          <input type="url" class="form__input form__mesto-avatar-url-input" id="form__mesto-avatar-url-input" name="mesto-avatar-url" placeholder="Ссылка на аватар" required>
+          <span class="form__input-error form__mesto-avatar-url-input-error"></span>
+        </label>
+      </fieldset>
+      <button type="submit" class="form__accept form__accept-profile-edit" disabled>Сохранить</button>
+    </form>
+  </div>
+</div>
+<div class="popup" id="popup-accept-option" hidden >
+  <div class="popup__container">
+    <button class="popup__close-btn" type="button"></button>
+    <form action="#" class="form card-add-form" name="card-add-form" novalidate>
+      <h2 class="form__title">Вы уверены?</h2>
+      <button type="submit" class="form__accept form__accept-profile-edit">Да</button>
+    </form>
+  </div>
+</div>
+<div class="popup" id="popup-error" hidden >
+  <div class="popup__container">
+    <button class="popup__close-btn" type="button"></button>
+    <form action="#" class="form error-form" name="error-form" novalidate>
+      <h2 class="form__title">Произошла ошибка:</h2>
+      <p class="form__error">Unexpected error</p>
+    </form>
+  </div>
+</div>
 <div class="popup" id="popup-selected-card" hidden >
   <div class="popup__container">
     <button class="popup__close-btn" type="button"></button>
@@ -79,7 +111,10 @@
     <img src="<%=require('./images/karachaevsk.jpg')%>" alt="Фото Карачаевска" class="card__image">
     <div class="card__description">
       <h3 class="card__description-text">Карачаевск</h3>
-      <button class="card__description-like" type="button"></button>
+      <div class="card__description-like-group">
+        <button class="card__description-like" type="button"></button>
+        <div class="card__description-like-count">0</div>
+      </div>
     </div>
   </div>
 </template>

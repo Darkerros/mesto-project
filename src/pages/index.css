@@ -10,6 +10,7 @@
 @import url(../blocks/popup/__img-description/popup__img-description.css);
 /*Form*/
 @import url(../blocks/form/form.css);
+@import url(../blocks/form/__error/form__error.css);
 @import url(../blocks/form/__title/form__title.css);
 @import url(../blocks/form/__edit-profile-set/form__edit-profile-set.css);
 @import url(../blocks/form/__input/form__input.css);
@@ -34,9 +35,12 @@
 /*Card*/
 @import url(../blocks/card/card.css);
 @import url(../blocks/card/__remove-icon/card__remove-icon.css);
+@import url(../blocks/card/__remove-icon/_type/card__remove-icon_type_hidden.css);
 @import url(../blocks/card/__description/card__description.css);
 @import url(../blocks/card/__description-text/card___description-text.css);
 @import url(../blocks/card/__description-like/card__description-like.css);
+@import url(../blocks/card/__description-like-count/card__description-like-count.css);
+@import url(../blocks/card/__description-like-group/card__description-like-group.css);
 @import url(../blocks/card/__description-like/_active/card__description-like_active.css);
 @import url(../blocks/card/__image/card__image.css);
 /*Elements*/
