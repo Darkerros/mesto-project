@@ -3,7 +3,7 @@ import * as card from './card'
 import * as modal from './modal'
 import * as validate from './validate'
 import * as consts from './consts'
-
+import './api'
 
 
 export function getProfileNameAndAbout() {
