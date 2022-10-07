@@ -41,20 +41,20 @@ const endpointAndMethodGenerator = {
 const apiConfig = {
     headers: {
         'Authorization': autorizationToken,
-        'Accept-Encoding': 'application/json',
+        'Content-Type': 'application/json',
     },
     baseurl: `https://nomoreparties.co/v1/${cohortId}/`
 }
 
 function createRequest(endpointSettings, body = '') {
-    const params = {
+    const reqSettings = {
         headers: apiConfig.headers,
         method: endpointSettings.method,
     }
-    methods !== methods.GET && body ?  params.body = JSON.stringify({...body}): false
+    methods !== methods.GET && body ?  reqSettings.body = JSON.stringify(body): false
 
 
-    return fetch(apiConfig.baseurl + endpointSettings.endpoint,params)
+    return fetch(apiConfig.baseurl + endpointSettings.endpoint,reqSettings)
         .then(res => {
             if (res.ok) return res.json();
             return  Promise.reject(res);
