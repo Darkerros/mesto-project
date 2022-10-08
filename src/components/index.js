@@ -46,7 +46,8 @@ function sendEditForm(evt) {
             modal.openErrorPopup(error.message)
         }))
         .finally(() => {
-            setButtonText(consts.profilePopupSubmitButton,'Сохранить')
+            setTimeout(() => setButtonText(consts.profilePopupSubmitButton,'Сохранить'),1000)
+
         })
 }
 function sendAddForm(evt) {
@@ -72,13 +73,15 @@ function sendAddForm(evt) {
             },1000)
         }))
         .finally(() => {
-            setButtonText(consts.popupCardFormSubmitButton,'Сохранить')
+            setTimeout(() => setButtonText(consts.popupCardFormSubmitButton,'Сохранить'),1000)
+
         })
 }
 
 function sendUpdateAvatarForm(evt){
     evt.preventDefault();
     const avatarUrl = consts.avatarUpdatePopupInput.value
+    evt.target.reset()
     setButtonText(consts.avatarUpdatePopupSubmitBtn,"Идет сохранение...")
     disableButton(consts.avatarUpdatePopupSubmitBtn)
     api.updateAvatar(avatarUrl)
@@ -97,7 +100,8 @@ function sendUpdateAvatarForm(evt){
             },1000)
         }))
         .finally(() => {
-            setButtonText(consts.avatarUpdatePopupSubmitBtn,'Сохранить')
+            setTimeout(() => setButtonText(consts.avatarUpdatePopupSubmitBtn,'Сохранить'),1000)
+
         })
 }
 
