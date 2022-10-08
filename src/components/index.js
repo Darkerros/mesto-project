@@ -72,7 +72,7 @@ function sendAddForm(evt) {
             },1000)
         }))
         .finally(() => {
-            setButtonText(consts.profilePopupSubmitButton,'Сохранить')
+            setButtonText(consts.popupCardFormSubmitButton,'Сохранить')
         })
 }
 
@@ -97,7 +97,7 @@ function sendUpdateAvatarForm(evt){
             },1000)
         }))
         .finally(() => {
-            setButtonText(consts.profilePopupSubmitButton,'Сохранить')
+            setButtonText(consts.avatarUpdatePopupSubmitBtn,'Сохранить')
         })
 }
 
