@@ -46,9 +46,7 @@ function clickRemoveButton(evt, cardId) {
             const elementToRemove = evt.target.closest('.card');
             elementToRemove.remove();
         })
-        .catch(errorResp => errorResp.json().then(error => {
-            modal.openErrorPopup(error.message)
-        }))
+        .catch(handleError)
 }
 
 function clickLikeButton(likeBtn, cardId, cardLikeCountElement) {
@@ -58,17 +56,15 @@ function clickLikeButton(likeBtn, cardId, cardLikeCountElement) {
                 cardLikeCountElement.textContent = cardInfo.likes.length
                 likeBtn.classList.remove("card__description-like_active");
             })
-            .catch(errorResp => errorResp.json().then(error => {
-                modal.openErrorPopup(error.message)
-            }))
+            .catch(handleError)
     } else {
         api.installLike(cardId)
             .then(cardInfo => {
                 cardLikeCountElement.textContent = cardInfo.likes.length
                 likeBtn.classList.add("card__description-like_active");
             })
-            .catch(errorResp => errorResp.json().then(error => {
-                modal.openErrorPopup(error.message)
-            }))
+            .catch(handleError)
     }
 }
+
+const handleError = (errorResp) => errorResp.json().then((error) => modal.openErrorPopup(error.message))

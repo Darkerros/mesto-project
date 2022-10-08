@@ -8,7 +8,7 @@ export const profile = {
     "cohort" : ""
 }
 
-export function setprofile(newProfile){
+export function setProfile(newProfile){
     profile.name = newProfile.name
     profile.about = newProfile.about
     profile.avatar = newProfile.avatar
@@ -16,16 +16,6 @@ export function setprofile(newProfile){
     profile.cohort = newProfile.cohort
     renderCurrentProfile()
     return {...profile}
-}
-export function setprofileInfo(name,about){
-    profile.name = name
-    profile.about = about
-    renderCurrentProfile()
-    return {...profile}
-}
-export function updateProfileAvatar(avatarUrl){
-    profile.avatar = avatarUrl
-    renderCurrentProfile()
 }
 export function isIncludeCurrentProfile(idList){
     return idList.some(id => profile._id === id)
