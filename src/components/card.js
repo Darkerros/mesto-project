@@ -2,6 +2,7 @@ import * as modal from './modal'
 import * as consts from './consts'
 import * as profile from './profile'
 import * as api from './api'
+import * as utils from './utils'
 
 export function addCard(filledCard) {
     consts.elementsSection.prepend(filledCard);
@@ -46,7 +47,7 @@ function clickRemoveButton(evt, cardId) {
             const elementToRemove = evt.target.closest('.card');
             elementToRemove.remove();
         })
-        .catch(handleError)
+        .catch(utils.handleError)
 }
 
 function clickLikeButton(likeBtn, cardId, cardLikeCountElement) {
@@ -63,8 +64,7 @@ function clickLikeButton(likeBtn, cardId, cardLikeCountElement) {
                 cardLikeCountElement.textContent = cardInfo.likes.length
                 likeBtn.classList.add("card__description-like_active");
             })
-            .catch(handleError)
+            .catch(utils.handleError)
     }
 }
 
-const handleError = (errorResp) => errorResp.json().then((error) => modal.openErrorPopup(error.message))

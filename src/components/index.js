@@ -5,17 +5,13 @@ import * as validate from './validate'
 import * as consts from './consts'
 import * as api from './api'
 import * as profile from './profile'
-
+import * as utils from './utils'
 
 export function getProfileNameAndAbout() {
     return {"name": consts.profileNameElement.textContent, "about": consts.profileAboutElement.textContent}
 }
-function disableButton(button){
-    button.setAttribute("disabled",'disabled')
-}
-function setButtonText(button,text){
-    button.textContent = text
-}
+
+
 
 function openPopupProfileEdit(editPopup) {
     const profile = getProfileNameAndAbout()
@@ -30,13 +26,12 @@ function sendEditForm(evt) {
     evt.preventDefault();
     const nickname = consts.profilePopupNicknameInput.value
     const about = consts.profilePopupAboutInput.value
-    setButtonText(consts.profilePopupSubmitButton,'Идет сохранение...')
+    utils.setButtonText(consts.profilePopupSubmitButton,'Идет сохранение...')
     api.updateProfile(nickname,about)
         .then(updateProfileInfo => {
-            evt.target.reset()
-            disableButton(consts.profilePopupSubmitButton)
-            setButtonText(consts.profilePopupSubmitButton,'Успешно')
+            utils.setButtonText(consts.profilePopupSubmitButton,'Успешно')
             setTimeout(() => {
+                evt.target.reset()
                 profile.setProfile(updateProfileInfo)
                 modal.closePopup(consts.profilePopup);
             },700)
@@ -46,59 +41,57 @@ function sendEditForm(evt) {
             modal.openErrorPopup(error.message)
         }))
         .finally(() => {
-            setTimeout(() => setButtonText(consts.profilePopupSubmitButton,'Сохранить'),1000)
+            setTimeout(() => utils.setButtonText(consts.profilePopupSubmitButton,'Сохранить'),1000)
         })
 }
 function sendAddForm(evt) {
     evt.preventDefault();
     const name = consts.popupCardFormNameInput.value
     const link = consts.popupCardFormImageLink.value
-    setButtonText(consts.popupCardFormSubmitButton,"Идет сохранение")
+    utils.setButtonText(consts.popupCardFormSubmitButton,"Идет сохранение")
     api.addCard(name,link)
         .then(addedCardInfo => {
-            evt.target.reset()
-            disableButton(consts.popupCardFormSubmitButton)
-            setButtonText(consts.popupCardFormSubmitButton,"Успешно")
+            utils.setButtonText(consts.popupCardFormSubmitButton,"Успешно")
             setTimeout(() => {
+                evt.target.reset()
                 modal.closePopup(consts.popupCard)
                 card.addCard(card.getFilledCard(addedCardInfo))
             },1000)
         })
         .catch(errorResp => errorResp.json().then(error => {
-            setButtonText(consts.popupCardFormSubmitButton,"Не удалось добавить карточку")
+            utils.setButtonText(consts.popupCardFormSubmitButton,"Не удалось добавить карточку")
             setTimeout(() => {
                 modal.closePopup(consts.popupCard)
                 modal.openErrorPopup(error.message)
             },1000)
         }))
         .finally(() => {
-            setTimeout(() => setButtonText(consts.popupCardFormSubmitButton,'Сохранить'),1000)
+            setTimeout(() => utils.setButtonText(consts.popupCardFormSubmitButton,'Сохранить'),1000)
         })
 }
 
 function sendUpdateAvatarForm(evt){
     evt.preventDefault();
     const avatarUrl = consts.avatarUpdatePopupInput.value
-    setButtonText(consts.avatarUpdatePopupSubmitBtn,"Идет сохранение...")
+    utils.setButtonText(consts.avatarUpdatePopupSubmitBtn,"Идет сохранение...")
     api.updateAvatar(avatarUrl)
         .then(profileInfo => {
-            evt.target.reset()
-            disableButton(consts.avatarUpdatePopupSubmitBtn)
-            setButtonText(consts.avatarUpdatePopupSubmitBtn,"Успешно")
+            utils.setButtonText(consts.avatarUpdatePopupSubmitBtn,"Успешно")
             setTimeout(() => {
+                evt.target.reset()
                 profile.setProfile(profileInfo)
                 modal.closePopup(consts.avatarUpdatePopup)
             },1000)
         })
         .catch(errorResp => errorResp.json().then(error => {
-            setButtonText(consts.avatarUpdatePopupSubmitBtn,"Произошла ошибка...")
+            utils.setButtonText(consts.avatarUpdatePopupSubmitBtn,"Произошла ошибка...")
             setTimeout(() => {
                 modal.closePopup(consts.avatarUpdatePopup)
                 modal.openErrorPopup(error.message)
             },1000)
         }))
         .finally(() => {
-            setTimeout(() => setButtonText(consts.avatarUpdatePopupSubmitBtn,'Сохранить'),1000)
+            setTimeout(() => utils.setButtonText(consts.avatarUpdatePopupSubmitBtn,'Сохранить'),1000)
         })
 }
 
@@ -129,4 +122,4 @@ Promise.all([api.getProfile(),api.getCards()])
         card.addCardsFromObjList(allCards.reverse())
         }
     )
-    .catch(errorResp => errorResp.json().then(error => modal.openErrorPopup(error.message)))
+    .catch(utils.handleError)
