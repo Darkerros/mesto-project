@@ -111,14 +111,14 @@ validate.enableValidation({
     errorClass: 'form__input__error_visible'
 });
 // Card Popup
-consts.addCardButton.addEventListener("click", () => {openPopupAddCard()})
-consts.popupCardForm.addEventListener("submit", (evt) => sendAddForm(evt))
+consts.addCardButton.addEventListener("click", openPopupAddCard)
+consts.popupCardForm.addEventListener("submit", sendAddForm)
 // Profile popup
 consts.profileEditButton.addEventListener("click", () => openPopupProfileEdit(consts.profilePopup));
-consts.profilePopupForm.addEventListener("submit", (evt) => sendEditForm(evt));
+consts.profilePopupForm.addEventListener("submit", sendEditForm);
 // Update avatar
-consts.avatarEditBtn.addEventListener('click',() => modal.openUpdateAvatarPopup())
-consts.avatarUpdatePopupForm.addEventListener('submit',(evt) => sendUpdateAvatarForm(evt))
+consts.avatarEditBtn.addEventListener('click',modal.openUpdateAvatarPopup)
+consts.avatarUpdatePopupForm.addEventListener('submit',sendUpdateAvatarForm)
 
 consts.allPopups.forEach(popup => popup.addEventListener('mousedown',evt => modal.closePopupOnCloseButtonAndContainer(popup,evt)))
 ;
