@@ -3,13 +3,15 @@ import * as card from './card'
 import * as modal from './modal'
 import * as validate from './validate'
 import * as consts from './consts'
-import * as api from './api'
+import {Api} from './api'
 import * as profile from './profile'
 import * as utils from './utils'
 
 export function getProfileNameAndAbout() {
     return {"name": consts.profileNameElement.textContent, "about": consts.profileAboutElement.textContent}
 }
+
+const api = new Api()
 
 
 

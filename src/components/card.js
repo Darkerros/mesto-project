@@ -1,8 +1,11 @@
 import * as modal from './modal'
 import * as consts from './consts'
 import * as profile from './profile'
-import * as api from './api'
 import * as utils from './utils'
+import {Api} from "./api";
+
+
+const api = new Api()
 
 export function addCard(filledCard) {
     consts.elementsSection.prepend(filledCard);

@@ -7,7 +7,7 @@ const methods = {
     DELETE: "DELETE"
 }
 const endpointAndMethodGenerator = {
-    getcards: () => {
+    getCards: () => {
         return {endpoint: 'cards', method: methods.GET}
     },
     addCards: () => {
@@ -16,7 +16,7 @@ const endpointAndMethodGenerator = {
     removeCard: (cardID) => {
         return {endpoint: `cards/${cardID}`, method: methods.DELETE}
     },
-    getprofile: () => {
+    getProfile: () => {
         return {endpoint: 'users/me', method: methods.GET}
     },
     updateProfile: () => {
@@ -33,8 +33,8 @@ const endpointAndMethodGenerator = {
     },
 }
 
-class Api {
-    constructor(baseUrl = 'https://nomoreparties.co/v1/cohort-42/',
+export class Api {
+    constructor(baseUrl = 'https://nomoreparties.co/v1/plus-cohort-15/',
                 authorization = 'fb67a6f2-1294-49f9-bf70-71dc37364dd5',
                 headers = {}) {
         this.baseUrl = baseUrl
@@ -63,7 +63,7 @@ class Api {
     }
 
     getCards() {
-        const requestSettings = endpointAndMethodGenerator.getcards()
+        const requestSettings = endpointAndMethodGenerator.getCards()
         return this.createRequest(requestSettings)
     }
 
@@ -88,7 +88,7 @@ class Api {
     }
 
     getProfile() {
-        const requestSettings = endpointAndMethodGenerator.getprofile()
+        const requestSettings = endpointAndMethodGenerator.getProfile()
         return this.createRequest(requestSettings)
     }
 
@@ -102,3 +102,4 @@ class Api {
         return this.createRequest(requestSettings, {avatar: avatarUrl})
     }
 }
+
