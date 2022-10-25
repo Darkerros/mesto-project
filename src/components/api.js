@@ -1,7 +1,3 @@
-
-const autorizationToken = 'fb67a6f2-1294-49f9-bf70-71dc37364dd5'
-const cohortId = 'plus-cohort-15'
-
 const methods = {
     GET: "GET",
     PUT: "PUT",
@@ -10,9 +6,8 @@ const methods = {
     PATCH: "PATCH",
     DELETE: "DELETE"
 }
-
 const endpointAndMethodGenerator = {
-    getcards: () => {
+    getCards: () => {
         return {endpoint: 'cards', method: methods.GET}
     },
     addCards: () => {
@@ -21,7 +16,7 @@ const endpointAndMethodGenerator = {
     removeCard: (cardID) => {
         return {endpoint: `cards/${cardID}`, method: methods.DELETE}
     },
-    getprofile: () => {
+    getProfile: () => {
         return {endpoint: 'users/me', method: methods.GET}
     },
     updateProfile: () => {
@@ -38,61 +33,73 @@ const endpointAndMethodGenerator = {
     },
 }
 
-const apiConfig = {
-    headers: {
-        'Authorization': autorizationToken,
-        'Content-Type': 'application/json',
-    },
-    baseurl: `https://nomoreparties.co/v1/${cohortId}/`
-}
-
-function createRequest(endpointSettings, body = '') {
-    const reqSettings = {
-        headers: apiConfig.headers,
-        method: endpointSettings.method,
+export class Api {
+    constructor(baseUrl = 'https://nomoreparties.co/v1/plus-cohort-15/',
+                authorization = 'fb67a6f2-1294-49f9-bf70-71dc37364dd5',
+                headers = {}) {
+        this.baseUrl = baseUrl
+        this._authorization = authorization
+        this.headers = {
+            authorization: this._authorization,
+            'Content-Type': 'application/json',
+            ...headers
+        }
     }
-    methods !== methods.GET && body ?  reqSettings.body = JSON.stringify(body): false
+
+    createRequest(endpointSettings, body = '') {
+
+        const reqSettings = {
+            headers: this.headers,
+            method: endpointSettings.method,
+        }
+        methods !== methods.GET && body ? reqSettings.body = JSON.stringify(body) : false
 
 
-    return fetch(apiConfig.baseurl + endpointSettings.endpoint,reqSettings)
-        .then(res => {
-            if (res.ok) return res.json();
-            return  Promise.reject(res);
-        })
+        return fetch(this.baseUrl + endpointSettings.endpoint, reqSettings)
+            .then(res => {
+                if (res.ok) return res.json();
+                return Promise.reject(res);
+            })
+    }
+
+    getCards() {
+        const requestSettings = endpointAndMethodGenerator.getCards()
+        return this.createRequest(requestSettings)
+    }
+
+    addCard(name, link) {
+        const requestSettings = endpointAndMethodGenerator.addCards()
+        return this.createRequest(requestSettings, {name: name, link: link})
+    }
+
+    deleteCard(cardId) {
+        const requestSettings = endpointAndMethodGenerator.removeCard(cardId)
+        return this.createRequest(requestSettings)
+    }
+
+    installLike(cardId) {
+        const requestSettings = endpointAndMethodGenerator.installLike(cardId)
+        return this.createRequest(requestSettings)
+    }
+
+    deleteLike(cardId) {
+        const requestSettings = endpointAndMethodGenerator.deleteLike(cardId)
+        return this.createRequest(requestSettings)
+    }
+
+    getProfile() {
+        const requestSettings = endpointAndMethodGenerator.getProfile()
+        return this.createRequest(requestSettings)
+    }
+
+    updateProfile(name, about) {
+        const requestSettings = endpointAndMethodGenerator.updateProfile()
+        return this.createRequest(requestSettings, {name, about})
+    }
+
+    updateAvatar(avatarUrl) {
+        const requestSettings = endpointAndMethodGenerator.updateAvatar()
+        return this.createRequest(requestSettings, {avatar: avatarUrl})
+    }
 }
 
-export function getCards() {
-    const requestSettings = endpointAndMethodGenerator.getcards()
-    return createRequest(requestSettings)
-}
-export function addCard(name,link){
-    const requestSettings = endpointAndMethodGenerator.addCards()
-    return createRequest(requestSettings,{name: name,link : link})
-}
-export function deleteCard(cardId){
-    const requestSettings = endpointAndMethodGenerator.removeCard(cardId)
-    return createRequest(requestSettings)
-}
-
-export function installLike(cardId){
-    const requestSettings = endpointAndMethodGenerator.installLike(cardId)
-    return createRequest(requestSettings)
-}
-export function deleteLike(cardId){
-    const requestSettings = endpointAndMethodGenerator.deleteLike(cardId)
-    return createRequest(requestSettings)
-}
-
-export function getProfile() {
-    const requestSettings = endpointAndMethodGenerator.getprofile()
-    return createRequest(requestSettings)
-}
-export function updateProfile(name,about) {
-    const requestSettings = endpointAndMethodGenerator.updateProfile()
-    return createRequest(requestSettings,{name,about})
-}
-
-export function updateAvatar(avatarUrl){
-    const requestSettings = endpointAndMethodGenerator.updateAvatar()
-    return createRequest(requestSettings,{avatar: avatarUrl})
-}

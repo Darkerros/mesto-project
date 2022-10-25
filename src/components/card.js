@@ -1,8 +1,11 @@
-import * as modal from './modal'
+import Popup from './Popup'
 import * as consts from './consts'
 import * as profile from './profile'
-import * as api from './api'
 import * as utils from './utils'
+import {Api} from "./api";
+
+
+const api = new Api()
 
 export function addCard(filledCard) {
     consts.elementsSection.prepend(filledCard);
@@ -33,7 +36,7 @@ export function getFilledCard(cardInfo) {
     }
 
     cardLikeBtn.addEventListener("click", (evt) => clickLikeButton(cardLikeBtn, cardInfo._id, cardLikeCountElement));
-    cardImage.addEventListener("click", (evt) => modal.openPopupImage(cardInfo.name, cardInfo.link));
+    cardImage.addEventListener("click", (evt) => Popup.openPopupImage(cardInfo.name, cardInfo.link));
     return currentCard
 }
 
