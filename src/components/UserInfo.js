@@ -1,9 +1,9 @@
 
 export default class UserInfo {
-    constructor({nameElementSelector, aboutElementSelector, avatarElementSelector,apiGetUserFn,apiSetUserInfoFn}) {
+    constructor({nameElementSelector, aboutSelector, avatarSelector,apiGetUserFn,apiSetUserInfoFn}) {
         this._nameElement = document.querySelector(nameElementSelector)
-        this._aboutElement = document.querySelector(aboutElementSelector)
-        this._avatarElement = document.querySelector(avatarElementSelector)
+        this._aboutElement = document.querySelector(aboutSelector)
+        this._avatarElement = document.querySelector(avatarSelector)
 
         this._getUserFn = apiGetUserFn
         this._setUserInfoFn = apiSetUserInfoFn
