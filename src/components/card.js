@@ -36,10 +36,10 @@ class Card {
         if (this._isIncludeProfileFn(this._likesIdList)) {
             this._cardLikeBtn.classList.add('card__description-like_active')
         }
-        if (this._isCurrentProfileFn(this._ownerId)) {
-            this._cardRemoveBtn.addEventListener("click", (evt) => clickRemoveButton(evt, cardInfo._id));
-        } else {
+        if (!this._isCurrentProfileFn(this._ownerId)) {
             this._cardRemoveBtn.classList.add('card__remove-icon_type_hidden')
+        } else {
+            this._cardRemoveBtn.addEventListener("click", (evt) => clickRemoveButton(evt, cardInfo._id));
         }
     }
 
