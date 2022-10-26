@@ -1,7 +1,8 @@
 import '../pages/index.css'
 import * as card from './card'
 import PopupWithImage from './PopupWithImage'
-import PopupWithForm from "./PopupWithForm";
+import PopupWithForm from "./PopupWithForm"
+import Section from "./Section";
 import * as validate from './validate'
 import * as consts from './consts'
 import {Api} from './api'
