@@ -1,6 +1,8 @@
 import '../pages/index.css'
 import * as card from './card'
-import * as modal from './modal'
+import PopupWithImage from './PopupWithImage'
+import PopupWithForm from "./PopupWithForm"
+import Section from "./Section";
 import * as validate from './validate'
 import * as consts from './consts'
 import {Api} from './api'
@@ -19,10 +21,10 @@ function openPopupProfileEdit(editPopup) {
     const profile = getProfileNameAndAbout()
     consts.profilePopupNicknameInput.value = profile["name"];
     consts.profilePopupAboutInput.value = profile["about"];
-    modal.openPopup(editPopup);
+    Popup.openPopup(editPopup);
 }
 function openPopupAddCard(){
-    modal.openPopup(consts.popupCard)
+    Popup.openPopup(consts.popupCard)
 }
 function sendEditForm(evt) {
     evt.preventDefault();
@@ -35,12 +37,12 @@ function sendEditForm(evt) {
             setTimeout(() => {
                 evt.target.reset()
                 profile.setProfile(updateProfileInfo)
-                modal.closePopup(consts.profilePopup);
+                Popup.closePopup(consts.profilePopup);
             },700)
         })
         .catch(errorResp => errorResp.json().then(error => {
-            modal.closePopup(consts.profilePopup);
-            modal.openErrorPopup(error.message)
+            Popup.closePopup(consts.profilePopup);
+            Popup.openErrorPopup(error.message)
         }))
         .finally(() => {
             setTimeout(() => utils.setButtonText(consts.profilePopupSubmitButton,'Сохранить'),1000)
@@ -56,15 +58,15 @@ function sendAddForm(evt) {
             utils.setButtonText(consts.popupCardFormSubmitButton,"Успешно")
             setTimeout(() => {
                 evt.target.reset()
-                modal.closePopup(consts.popupCard)
+                Popup.closePopup(consts.popupCard)
                 card.addCard(card.getFilledCard(addedCardInfo))
             },1000)
         })
         .catch(errorResp => errorResp.json().then(error => {
             utils.setButtonText(consts.popupCardFormSubmitButton,"Не удалось добавить карточку")
             setTimeout(() => {
-                modal.closePopup(consts.popupCard)
-                modal.openErrorPopup(error.message)
+                Popup.closePopup(consts.popupCard)
+                Popup.openErrorPopup(error.message)
             },1000)
         }))
         .finally(() => {
@@ -82,14 +84,14 @@ function sendUpdateAvatarForm(evt){
             setTimeout(() => {
                 evt.target.reset()
                 profile.setProfile(profileInfo)
-                modal.closePopup(consts.avatarUpdatePopup)
+                Popup.closePopup(consts.avatarUpdatePopup)
             },1000)
         })
         .catch(errorResp => errorResp.json().then(error => {
             utils.setButtonText(consts.avatarUpdatePopupSubmitBtn,"Произошла ошибка...")
             setTimeout(() => {
-                modal.closePopup(consts.avatarUpdatePopup)
-                modal.openErrorPopup(error.message)
+                Popup.closePopup(consts.avatarUpdatePopup)
+                Popup.openErrorPopup(error.message)
             },1000)
         }))
         .finally(() => {
@@ -112,10 +114,10 @@ consts.popupCardForm.addEventListener("submit", sendAddForm)
 consts.profileEditButton.addEventListener("click", () => openPopupProfileEdit(consts.profilePopup));
 consts.profilePopupForm.addEventListener("submit", sendEditForm);
 // Update avatar
-consts.avatarEditBtn.addEventListener('click',modal.openUpdateAvatarPopup)
+consts.avatarEditBtn.addEventListener('click',Popup.openUpdateAvatarPopup)
 consts.avatarUpdatePopupForm.addEventListener('submit',sendUpdateAvatarForm)
 
-consts.allPopups.forEach(popup => popup.addEventListener('mousedown',evt => modal.closePopupOnCloseButtonAndContainer(popup,evt)))
+consts.allPopups.forEach(popup => popup.addEventListener('mousedown',evt => Popup.closePopupOnCloseButtonAndContainer(popup,evt)))
 ;
 
 Promise.all([api.getProfile(),api.getCards()])
