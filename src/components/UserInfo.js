@@ -1,12 +1,11 @@
 
 export default class UserInfo {
-    constructor({nameElementSelector, aboutSelector, avatarSelector,apiGetUserFn,apiSetUserInfoFn}) {
+    constructor(nameElementSelector, aboutSelector, avatarSelector,api) {
         this._nameElement = document.querySelector(nameElementSelector)
         this._aboutElement = document.querySelector(aboutSelector)
         this._avatarElement = document.querySelector(avatarSelector)
 
-        this._getUserFn = apiGetUserFn
-        this._setUserInfoFn = apiSetUserInfoFn
+        this._api = api
 
         this.name = ''
         this.about = ''
@@ -16,19 +15,20 @@ export default class UserInfo {
     }
 
     getUserInfo() {
-        return this._getUserFn().then(userInfo => {
+        return this._api.getProfile().then(userInfo => {
             this.name = userInfo.name
             this.about = userInfo.about
             this.avatar = userInfo.avatar
             this._id = userInfo._id
             this.cohort = userInfo.cohort
             this._render()
+            console.log(this.name,this.about,this.avatar,this._id,this.cohort)
             return {...userInfo}
         })
     }
 
     setUserInfo(name,about) {
-        return this._setUserInfoFn({name: name,about : about}).then(userInfo => {
+        return this._api.setUserInfo(name,about).then(userInfo => {
             this.name = userInfo.name
             this.about = userInfo.about
             this._render()
