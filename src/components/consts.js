@@ -1,3 +1,10 @@
+import Popup from "./Popup";
+
+
+
+
+
+
 
 export const allPopups = document.querySelectorAll('.popup')
 //Card popup
@@ -56,7 +63,6 @@ export const imagePopupImgDescription = imagePopup.querySelector(".popup__img-de
 export const elementsSection = document.querySelector(".elements");
 
 // Error popup
-export const errorPopup = document.querySelector('#popup-error')
 export const errorPopupMessageElement = errorPopup.querySelector('.form__error')
 // accept popup
 export const acceptPopup = document.querySelector('#popup-error')
