@@ -73,7 +73,7 @@ export class Card {
     }
 
     setEventListeners() {
-        this._cardLikeBtn.addEventListener("click", this._clickLikeButton);
+        this._cardLikeBtn.addEventListener("click", () => this._clickLikeButton());
         this._cardImageElement.addEventListener("click", () => this._popupWithImage.open(this._name, this._avatarLink));
     }
 
