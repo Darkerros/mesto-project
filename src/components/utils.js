@@ -1,12 +1,3 @@
-import Popup from "./Popup";
-import * as consts from './consts'
-export function setButtonText(button,text){
-    button.textContent = text
-}
+import {errorPopup} from "./consts";
 
-function openErrorPopup(error){
-    consts.errorPopupMessageElement.textContent = error
-    consts.errorPopup.classList.add('popup_open')
-}
-
-export const handleError = (errorResp) => errorResp.json().then((error) => openErrorPopup(error.message))
+export const handleError = (errorResp) => errorResp.json().then((error) => errorPopup.open(error.message))
