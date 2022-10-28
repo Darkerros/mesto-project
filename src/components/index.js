@@ -54,10 +54,10 @@ function sendEditForm(data) {
     profileController.setUserInfo(data['nickname-set'],data['about-set'])
         .then(updateProfileInfo => {
             //utils.setButtonText(consts.profilePopupSubmitButton,'Успешно')
-            setTimeout(() => userEditPopup.close(),700)
+            setTimeout(() => this.close(),700)
         })
         .catch(errorResp => errorResp.json().then(error => {
-            userEditPopup.close();
+            this.close();
             consts.errorPopup.open(error.message)
         }))
         .finally(() => {
