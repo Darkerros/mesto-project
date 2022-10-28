@@ -1,19 +1,13 @@
 import '../pages/index.css'
-import {Api} from "./api";
-import {Card} from "./card";
-import UserInfo from "./UserInfo";
-import {logPlugin} from "@babel/preset-env/lib/debug";
-import PopupWithImage from "./PopupWithImage";
 // import * as card from './card'
 // import PopupWithImage from './PopupWithImage'
 // import PopupWithForm from "./PopupWithForm"
 // import Section from "./Section";
 // import * as validate from './validate'
-// import * as consts from './consts'
-// import {Api} from './api'
+//import * as consts from './consts'
 // import * as profile from './profile'
 // import * as utils from './utils'
-
+//
 // export function getProfileNameAndAbout() {
 //     return {"name": consts.profileNameElement.textContent, "about": consts.profileAboutElement.textContent}
 // }
@@ -27,9 +21,7 @@ import PopupWithImage from "./PopupWithImage";
 //     consts.profilePopupAboutInput.value = profile["about"];
 //     Popup.openPopup(editPopup);
 // }
-// function openPopupAddCard(){
-//     Popup.openPopup(consts.popupCard)
-// }
+//
 // function sendEditForm(evt) {
 //     evt.preventDefault();
 //     const nickname = consts.profilePopupNicknameInput.value
@@ -78,51 +70,18 @@ import PopupWithImage from "./PopupWithImage";
 //         })
 // }
 //
-// function sendUpdateAvatarForm(evt){
-//     evt.preventDefault();
-//     const avatarUrl = consts.avatarUpdatePopupInput.value
-//     utils.setButtonText(consts.avatarUpdatePopupSubmitBtn,"Идет сохранение...")
-//     api.updateAvatar(avatarUrl)
-//         .then(profileInfo => {
-//             utils.setButtonText(consts.avatarUpdatePopupSubmitBtn,"Успешно")
-//             setTimeout(() => {
-//                 evt.target.reset()
-//                 profile.setProfile(profileInfo)
-//                 Popup.closePopup(consts.avatarUpdatePopup)
-//             },1000)
-//         })
-//         .catch(errorResp => errorResp.json().then(error => {
-//             utils.setButtonText(consts.avatarUpdatePopupSubmitBtn,"Произошла ошибка...")
-//             setTimeout(() => {
-//                 Popup.closePopup(consts.avatarUpdatePopup)
-//                 Popup.openErrorPopup(error.message)
-//             },1000)
-//         }))
-//         .finally(() => {
-//             setTimeout(() => utils.setButtonText(consts.avatarUpdatePopupSubmitBtn,'Сохранить'),1000)
-//         })
-// }
+
 //
-// validate.enableValidation({
-//     formSelector: '.form',
-//     inputSelector: '.form__input',
-//     submitButtonSelector: '.form__accept',
-//     inactiveButtonClass: 'form__accept_disabled',
-//     inputErrorClass: 'form__input_type_error',
-//     errorClass: 'form__input__error_visible'
-// });
-// // Card Popup
-// consts.addCardButton.addEventListener("click", openPopupAddCard)
-// consts.popupCardForm.addEventListener("submit", sendAddForm)
-// // Profile popup
-// consts.profileEditButton.addEventListener("click", () => openPopupProfileEdit(consts.profilePopup));
-// consts.profilePopupForm.addEventListener("submit", sendEditForm);
-// // Update avatar
-// consts.avatarEditBtn.addEventListener('click',Popup.openUpdateAvatarPopup)
-// consts.avatarUpdatePopupForm.addEventListener('submit',sendUpdateAvatarForm)
+// // validate.enableValidation({
+// //     formSelector: '.form',
+// //     inputSelector: '.form__input',
+// //     submitButtonSelector: '.form__accept',
+// //     inactiveButtonClass: 'form__accept_disabled',
+// //     inputErrorClass: 'form__input_type_error',
+// //     errorClass: 'form__input__error_visible'
+// // });
 //
-// consts.allPopups.forEach(popup => popup.addEventListener('mousedown',evt => Popup.closePopupOnCloseButtonAndContainer(popup,evt)))
-// ;
+//
 //
 // Promise.all([api.getProfile(),api.getCards()])
 //     .then(([profileInfo,allCards]) => {
@@ -134,17 +93,98 @@ import PopupWithImage from "./PopupWithImage";
 
 
 
+
+import PopupWithImage from "./PopupWithImage";
+import PopupWithForm from "./PopupWithForm";
+import {PopupWithError} from "./PopupWithError";
+import UserInfo from "./UserInfo";
+import {Api} from "./Api";
+
 const api = new Api()
-const profile = new UserInfo('.profile__name','.profile__about','.profile__avatar',api)
-const popupWithImage = new PopupWithImage('#popup-selected-card','popup_open','popup__close-btn','.popup__image','.popup__img-description')
+
+const profileController = new UserInfo(
+    'profile__name',
+    'profile__about',
+    'profile__avatar',
+    api)
+
+// function sendUpdateAvatarForm(avatarLink){
+//     this.renderLoading(true)
+//     //utils.setButtonText(consts.avatarUpdatePopupSubmitBtn,"Идет сохранение...")
+//     api.updateAvatar(avatarLink)
+//         .then(profileInfo => {
+//             //utils.setButtonText(consts.avatarUpdatePopupSubmitBtn,"Успешно")
+//             setTimeout(() => {
+//                 profile.setProfile(profileInfo)
+//                 this.close()
+//             },1000)
+//         })
+//         .catch(errorResp => errorResp.json().then(error => {
+//             //utils.setButtonText(consts.avatarUpdatePopupSubmitBtn,"Произошла ошибка...")
+//             setTimeout(() => {
+//                 this.close()
+//                 errorPopup.open(error.message)
+//             },1000)
+//         }))
+//         .finally(() => {
+//             setTimeout(() => utils.setButtonText(consts.avatarUpdatePopupSubmitBtn,'Сохранить'),1000)
+//         })
+// }
+
+const avatarPopup = new PopupWithForm(
+    '#popup-update-avatar',
+    'popup_open',
+    'popup__close-btn',
+    (evt) => {
+        evt.preventDefault()
+    },
+    '.form',
+    '.form__accept',
+    '.form__input')
+
+const userEditPopup = new PopupWithForm(
+    '#popup-edit-profile',
+    'popup_open',
+    'popup__close-btn',
+    (evt) => {
+        evt.preventDefault()
+    },
+    '.form',
+    '.form__accept',
+    '.form__input')
+
+const cardPopup = new PopupWithForm(
+    '#popup-add-card',
+    'popup_open',
+    'popup__close-btn',
+    (evt) => {
+        evt.preventDefault()
+    },
+    '.form',
+    '.form__accept',
+    '.form__input')
+
+
+const imagePopup = new PopupWithImage(
+    '#popup-selected-card',
+    'popup_open',
+    'popup__close-btn',
+    '.popup__image',
+    '.popup__img-description')
+
+const errorPopup = new PopupWithError(
+    '#popup-error',
+    'popup_open',
+    'popup__close-btn',
+    '.form__error')
 
 
 
-profile.getUserInfo().then(getProfile => {
-    api.getCards().then(data => {
-        data.map(cardInfo => {
-            const card = new Card('#card-template',cardInfo,profile,api,popupWithImage)
-            //elementsSection.append(card.getCard())
-        })
-    })
-})
+consts.addCardButton.addEventListener("click", () => cardPopup.open())
+consts.profileEditButton.addEventListener("click", () => userEditPopup.open());
+consts.avatarEditBtn.addEventListener('click',() => avatarPopup.open())
+
+avatarPopup.setEventListeners()
+userEditPopup.setEventListeners()
+cardPopup.setEventListeners()
+imagePopup.setEventListeners()
