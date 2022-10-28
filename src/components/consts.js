@@ -1,4 +1,10 @@
+import {PopupWithError} from "./PopupWithError";
 
+export const errorPopup = new PopupWithError(
+    '#popup-error',
+    'popup_open',
+    'popup__close-btn',
+    '.form__error')
 
 export const addCardButton = document.querySelector(".profile").querySelector('.profile__add-button');
 export const profileEditButton = document.querySelector('.profile').querySelector('.profile__edit-btn');
