@@ -28,7 +28,7 @@ export default class UserInfo {
     }
 
     setUserInfo(name,about) {
-        return this._api.setUserInfo(name,about).then(userInfo => {
+        return this._api.updateProfile(name,about).then(userInfo => {
             this.name = userInfo.name
             this.about = userInfo.about
             this._render()
