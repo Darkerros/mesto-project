@@ -1,4 +1,3 @@
-import Popup from './Popup'
 import {handleError} from "./utils";
 
 
@@ -74,8 +73,8 @@ export class Card {
     }
 
     setEventListeners() {
-        this._cardLikeBtn.addEventListener("click", (evt) => this._clickLikeButton());
-        this._cardImageElement.addEventListener("click", (evt) => this._popupWithImage.open(this._name, this._avatarLink));
+        this._cardLikeBtn.addEventListener("click", this._clickLikeButton);
+        this._cardImageElement.addEventListener("click", () => this._popupWithImage.open(this._name, this._avatarLink));
     }
 
 }
