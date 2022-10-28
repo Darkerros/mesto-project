@@ -36,6 +36,14 @@ export default class UserInfo {
         })
     }
 
+    updateUserAvatar(avatarLink) {
+        return this._api.updateAvatar(avatarLink).then(userInfo => {
+            this.avatar = userInfo.avatar
+            this._render()
+            return {...userInfo}
+        })
+    }
+
     _render(){
         this._nameElement.textContent = this.name
         this._aboutElement.textContent = this.about
