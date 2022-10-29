@@ -38,7 +38,7 @@ export class Card {
         const is_include_profile = this._profile.isIncludeCurrentProfile(this._likesIdList)
         const is_owner = this._profile.isCurrentProfile(this._ownerId)
 
-        !is_owner ? this._cardRemoveBtn.classList.add('card__remove-icon_type_hidden') : this._cardRemoveBtn.addEventListener("click",this._clickRemoveButton)
+        !is_owner ? this._cardRemoveBtn.classList.add('card__remove-icon_type_hidden') : this._cardRemoveBtn.addEventListener("click",(evt) => this._clickRemoveButton(evt))
         is_include_profile ? this._cardLikeBtn.classList.add('card__description-like_active') : false
 
         this.setEventListeners()
