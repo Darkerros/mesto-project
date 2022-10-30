@@ -8,6 +8,8 @@ import * as consts from "./consts";
 import Section from "./Section";
 import {Card} from "./Card";
 import * as utils from "./utils";
+import FormValidator from "./FormValidator";
+import {addCardFormElement, editProfileFormElement, updateAvatarFormElement} from "./consts";
 
 const api = new Api()
 
@@ -125,8 +127,41 @@ const imagePopup = new PopupWithImage(
     '.popup__image',
     '.popup__img-description')
 
+const addCardFormValidator = new FormValidator(
+    {
+        formSelector: '.form',
+        inputSelector: '.form__input',
+        submitButtonSelector: '.form__accept',
+        inactiveButtonClass: 'form__accept_disabled',
+        inputErrorClass: 'form__input_type_error',
+        errorClass: 'form__input__error_visible'
+    },
+    consts.addCardFormElement
+)
 
+const updateAvatarFormValidator = new FormValidator(
+    {
+        formSelector: '.form',
+        inputSelector: '.form__input',
+        submitButtonSelector: '.form__accept',
+        inactiveButtonClass: 'form__accept_disabled',
+        inputErrorClass: 'form__input_type_error',
+        errorClass: 'form__input__error_visible'
+    },
+    consts.updateAvatarFormElement
+)
 
+const editProfileFormValidator = new FormValidator(
+    {
+        formSelector: '.form',
+        inputSelector: '.form__input',
+        submitButtonSelector: '.form__accept',
+        inactiveButtonClass: 'form__accept_disabled',
+        inputErrorClass: 'form__input_type_error',
+        errorClass: 'form__input__error_visible'
+    },
+    consts.editProfileFormElement
+)
 
 
 consts.addCardButton.addEventListener("click", () => cardPopup.open())
@@ -139,18 +174,13 @@ cardPopup.setEventListeners()
 imagePopup.setEventListeners()
 
 consts.errorPopup.setEventListeners()
-//
-// // validate.enableValidation({
-// //     formSelector: '.form',
-// //     inputSelector: '.form__input',
-// //     submitButtonSelector: '.form__accept',
-// //     inactiveButtonClass: 'form__accept_disabled',
-// //     inputErrorClass: 'form__input_type_error',
-// //     errorClass: 'form__input__error_visible'
-// // });
-//
-//
-//
+
+addCardFormValidator.enableValidation()
+updateAvatarFormValidator.enableValidation()
+editProfileFormValidator.enableValidation()
+
+
+
 Promise.all([profileController.getUserInfo(),api.getCards()])
     .then(([profileInfo,allCards]) => {
             const cardsSection = new Section(

@@ -17,3 +17,7 @@ export const profilePopupAboutInput = profilePopup.querySelector('#form-about-in
 export const profileNameElement = document.querySelector('.profile').querySelector('.profile__name');
 export const profileAboutElement = document.querySelector('.profile').querySelector('.profile__about');
 
+export const addCardFormElement = document.querySelector('#popup-add-card').querySelector('.form');
+export const updateAvatarFormElement = document.querySelector('#popup-update-avatar').querySelector('.form');
+export const editProfileFormElement = document.querySelector('#popup-edit-profile').querySelector('.form');
+
