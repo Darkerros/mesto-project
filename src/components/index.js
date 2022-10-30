@@ -9,7 +9,6 @@ import Section from "./Section";
 import {Card} from "./Card";
 import * as utils from "./utils";
 import FormValidator from "./FormValidator";
-import {addCardFormElement, editProfileFormElement, updateAvatarFormElement} from "./consts";
 
 const api = new Api()
 
@@ -32,30 +31,24 @@ function openPopupProfileEdit() {
 
 function sendUpdateAvatarForm(data){
     this.renderLoading(true)
-    //utils.setButtonText(consts.avatarUpdatePopupSubmitBtn,"Идет сохранение...")
     profileController.updateUserAvatar(data['mesto-avatar-url'])
         .then(profileInfo => {
-            //utils.setButtonText(consts.avatarUpdatePopupSubmitBtn,"Успешно")
             setTimeout(() => this.close(),1000)
         })
         .catch(errorResp => errorResp.json().then(error => {
             this.renderLoading(false)
-            //utils.setButtonText(consts.avatarUpdatePopupSubmitBtn,"Произошла ошибка...")
             setTimeout(() => this.close(),1000)
             consts.errorPopup.open(error.message)
         }))
         .finally(() => {
             setTimeout(() => this.renderLoading(false),1000)
-            //setTimeout(() => utils.setButtonText(consts.avatarUpdatePopupSubmitBtn,'Сохранить'),1000)
         })
 }
 function sendEditForm(data) {
     console.log(data)
-    //utils.setButtonText(consts.profilePopupSubmitButton,'Идет сохранение...')
     this.renderLoading(true)
     profileController.setUserInfo(data['nickname-set'],data['about-set'])
         .then(updateProfileInfo => {
-            //utils.setButtonText(consts.profilePopupSubmitButton,'Успешно')
             setTimeout(() => this.close(),700)
         })
         .catch(errorResp => errorResp.json().then(error => {
@@ -64,24 +57,19 @@ function sendEditForm(data) {
         }))
         .finally(() => {
             setTimeout(() => this.renderLoading(false),1000)
-            //setTimeout(() => utils.setButtonText(consts.profilePopupSubmitButton,'Сохранить'),1000)
         })
 }
 function sendAddForm(data) {
-    //utils.setButtonText(consts.popupCardFormSubmitButton,"Идет сохранение")
     this.renderLoading(true)
     api.addCard(data['mesto-add'],data['mesto-img-url'])
         .then(addedCardInfo => {
             this.renderLoading(false)
-            //utils.setButtonText(consts.popupCardFormSubmitButton,"Успешно")
             cardsSection.addItem(new Card('#card-template', addedCardInfo, profileController, api, imagePopup).getCard())
             setTimeout(() => {
                 this.close()
-                //card.addCard(card.getFilledCard(addedCardInfo))
             },1000)
         })
         .catch(errorResp => errorResp.json().then(error => {
-            //utils.setButtonText(consts.popupCardFormSubmitButton,"Не удалось добавить карточку")
             setTimeout(() => {
                 this.close()
                 consts.errorPopup.open(error.message)
@@ -89,7 +77,6 @@ function sendAddForm(data) {
         }))
         .finally(() => {
             setTimeout(() => this.renderLoading(false),1000)
-            //setTimeout(() => utils.setButtonText(consts.popupCardFormSubmitButton,'Сохранить'),1000)
         })
 }
 
@@ -203,4 +190,4 @@ Promise.all([profileController.getUserInfo(),api.getCards()])
             cardsSection.renderItems()
         }
     )
-    //.catch(utils.handleError)
+    .catch(utils.handleError)
