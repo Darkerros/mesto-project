@@ -5,10 +5,8 @@ import UserInfo from "../components/UserInfo";
 import {Api} from "../components/Api";
 import * as consts from "../utils/consts";
 import Section from "../components/Section";
-import {Card} from "../components/Card";
-import * as utils from "../utils/utils";
 import FormValidator from "../components/FormValidator";
-import {createCard} from "../utils/utils";
+import {createCard, handleError} from "../utils/utils";
 import {PopupWithError} from "../components/PopupWithError";
 
 const api = new Api()
@@ -31,45 +29,42 @@ function openPopupProfileEdit() {
         consts.profilePopupNicknameInput.value = user.name;
         consts.profilePopupAboutInput.value = user.about;
         userEditPopup.open();
-    })
+    }).catch(errorResp => handleError(errorResp, errorPopup))
 }
 
 function sendUpdateAvatarForm(data) {
     avatarPopup.renderLoading(true)
     profileController.updateUserAvatar(data['mesto-avatar-url'])
-        .then(profileInfo => {
+        .then(profileInfo => null)
+        .catch(errorResp => handleError(errorResp, errorPopup))
+        .finally(() => {
             avatarPopup.close()
+            avatarPopup.renderLoading(false)
         })
-        .catch(errorResp => errorResp.json().then(error => {
-            avatarPopup.close()
-            errorPopup.open(error.message)
-        }))
-        .finally(() => avatarPopup.renderLoading(false))
 }
+
 function sendEditForm(data) {
     userEditPopup.renderLoading(true)
     profileController.setUserInfo(data['nickname-set'], data['about-set'])
-        .then(updateProfileInfo => {
-            userEditPopup.close()
-        })
-        .catch(errorResp => errorResp.json().then(error => {
+        .then(updateProfileInfo => null)
+        .catch(errorResp => handleError(errorResp, errorPopup))
+        .finally(() => {
             userEditPopup.close();
-            errorPopup.open(error.message)
-        }))
-        .finally(() => userEditPopup.renderLoading(false))
+            userEditPopup.renderLoading(false)
+        })
 }
+
 function sendAddForm(data) {
     cardPopup.renderLoading(true)
     api.addCard(data['mesto-add'], data['mesto-img-url'])
         .then(addedCardInfo => {
-            cardsSection.addItem(new Card('#card-template', addedCardInfo, profileController, api, imagePopup,errorPopup).getCard())
-            cardPopup.close()
+            cardsSection.addItem(createCard(addedCardInfo, profileController, api, imagePopup, errorPopup))
         })
-        .catch(errorResp => errorResp.json().then(error => {
+        .catch(errorResp => handleError(errorResp, errorPopup))
+        .finally(() => {
             cardPopup.close()
-            errorPopup.open(error.message)
-        }))
-        .finally(() => cardPopup.renderLoading(false))
+            cardPopup.renderLoading(false)
+        })
 }
 
 const avatarPopup = new PopupWithForm('#popup-update-avatar', sendUpdateAvatarForm, consts.popupWithFormBaseSettings)
@@ -104,11 +99,11 @@ Promise.all([profileController.getUserInfo(), api.getCards()])
                 {
                     items: allCards,
                     rendererFN: (item) => {
-                        cardsSection.addItem(createCard(item,profileController,api,imagePopup,errorPopup))
+                        cardsSection.addItem(createCard(item, profileController, api, imagePopup, errorPopup))
                     }
                 },
                 '.elements')
             cardsSection.renderItems()
         }
     )
-    .catch(utils.handleError)
+    .catch(errorResp => handleError(errorResp, errorPopup))

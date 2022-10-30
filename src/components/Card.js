@@ -52,7 +52,7 @@ export class Card {
                 const elementToRemove = evt.target.closest('.card');
                 elementToRemove.remove();
             })
-            .catch(handleError)
+            .catch(error => handleError(error,this._errorPopup))
     }
 
     _clickLikeButton() {
@@ -62,7 +62,7 @@ export class Card {
                     this._cardLikeCountElement.textContent = cardInfo.likes.length
                     this._cardLikeBtn.classList.remove("card__description-like_active");
                 })
-                .catch(handleError)
+                .catch(error => handleError(error,this._errorPopup))
         } else {
             this._api.installLike(this._cardId)
                 .then(cardInfo => {
