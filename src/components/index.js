@@ -30,10 +30,10 @@ function openPopupProfileEdit() {
     userEditPopup.open();
 }
 
-function sendUpdateAvatarForm(avatarLink){
+function sendUpdateAvatarForm(data){
     this.renderLoading(true)
     //utils.setButtonText(consts.avatarUpdatePopupSubmitBtn,"Идет сохранение...")
-    profileController.updateUserAvatar(avatarLink)
+    profileController.updateUserAvatar(data['mesto-avatar-url'])
         .then(profileInfo => {
             //utils.setButtonText(consts.avatarUpdatePopupSubmitBtn,"Успешно")
             setTimeout(() => this.close(),1000)
@@ -42,7 +42,7 @@ function sendUpdateAvatarForm(avatarLink){
             this.renderLoading(false)
             //utils.setButtonText(consts.avatarUpdatePopupSubmitBtn,"Произошла ошибка...")
             setTimeout(() => this.close(),1000)
-            errorPopup.open(error.message)
+            consts.errorPopup.open(error.message)
         }))
         .finally(() => {
             setTimeout(() => this.renderLoading(false),1000)
@@ -67,13 +67,14 @@ function sendEditForm(data) {
             //setTimeout(() => utils.setButtonText(consts.profilePopupSubmitButton,'Сохранить'),1000)
         })
 }
-function sendAddForm({name, link}) {
+function sendAddForm(data) {
     //utils.setButtonText(consts.popupCardFormSubmitButton,"Идет сохранение")
     this.renderLoading(true)
-    api.addCard(name,link)
+    api.addCard(data['mesto-add'],data['mesto-img-url'])
         .then(addedCardInfo => {
             this.renderLoading(false)
             //utils.setButtonText(consts.popupCardFormSubmitButton,"Успешно")
+            cardsSection.addItem(new Card('#card-template', addedCardInfo, profileController, api, imagePopup).getCard())
             setTimeout(() => {
                 this.close()
                 //card.addCard(card.getFilledCard(addedCardInfo))
@@ -83,7 +84,7 @@ function sendAddForm({name, link}) {
             //utils.setButtonText(consts.popupCardFormSubmitButton,"Не удалось добавить карточку")
             setTimeout(() => {
                 this.close()
-                errorPopup.open(error.message)
+                consts.errorPopup.open(error.message)
             },1000)
         }))
         .finally(() => {
@@ -163,6 +164,14 @@ const editProfileFormValidator = new FormValidator(
     consts.editProfileFormElement
 )
 
+let cardsSection = new Section(
+    {
+        items: [],
+        rendererFN: (item) => {
+            cardsSection.addItem(new Card('#card-template', item, profileController, api, imagePopup).getCard())
+        }
+    },
+    '.elements')
 
 consts.addCardButton.addEventListener("click", () => cardPopup.open())
 consts.profileEditButton.addEventListener("click", () => openPopupProfileEdit());
@@ -183,9 +192,9 @@ editProfileFormValidator.enableValidation()
 
 Promise.all([profileController.getUserInfo(),api.getCards()])
     .then(([profileInfo,allCards]) => {
-            const cardsSection = new Section(
+            cardsSection = new Section(
                 {
-                    items: allCards.reverse(),
+                    items: allCards,
                     rendererFN: (item) => {
                         cardsSection.addItem(new Card('#card-template', item, profileController, api, imagePopup).getCard())
                     }
