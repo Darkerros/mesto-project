@@ -1,4 +1,4 @@
-import {handleError} from "./utils";
+import {handleError} from "../utils/utils";
 
 
 export class Card {
@@ -6,11 +6,12 @@ export class Card {
                 {name, link, owner, likes, _id},
                 profile,
                 api,
-                popupWithImage) {
+                popupWithImage,errorPopup) {
         this._cardTemplate = document.querySelector(cardTemplateSelector).content.cloneNode(true)
         this._profile = profile
         this._api = api
         this._popupWithImage = popupWithImage
+        this._errorPopup = errorPopup
 
         this._cardId = _id
         this._name = name
@@ -38,7 +39,7 @@ export class Card {
         const is_include_profile = this._profile.isIncludeCurrentProfile(this._likesIdList)
         const is_owner = this._profile.isCurrentProfile(this._ownerId)
 
-        !is_owner ? this._cardRemoveBtn.classList.add('card__remove-icon_type_hidden') : this._cardRemoveBtn.addEventListener("click",(evt) => this._clickRemoveButton(evt))
+        !is_owner ? this._cardRemoveBtn.classList.add('card__remove-icon_type_hidden') : false
         is_include_profile ? this._cardLikeBtn.classList.add('card__description-like_active') : false
 
         this.setEventListeners()
@@ -68,11 +69,12 @@ export class Card {
                     this._cardLikeCountElement.textContent = cardInfo.likes.length
                     this._cardLikeBtn.classList.add("card__description-like_active");
                 })
-                .catch(handleError)
+                .catch(error => handleError(error,this._errorPopup))
         }
     }
 
     setEventListeners() {
+        this._cardRemoveBtn.addEventListener("click",(evt) => this._clickRemoveButton(evt))
         this._cardLikeBtn.addEventListener("click", () => this._clickLikeButton());
         this._cardImageElement.addEventListener("click", () => this._popupWithImage.open(this._name, this._avatarLink));
     }

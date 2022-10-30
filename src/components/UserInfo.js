@@ -22,7 +22,6 @@ export default class UserInfo {
             this._id = userInfo._id
             this.cohort = userInfo.cohort
             this._render()
-            console.log(this.name,this.about,this.avatar,this._id,this.cohort)
             return {...userInfo}
         })
     }
